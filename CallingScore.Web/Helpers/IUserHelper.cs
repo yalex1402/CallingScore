@@ -17,6 +17,8 @@ namespace CallingScore.Web.Helpers
 
         Task AddUserToRoleAsync(UserEntity user, string roleName);
 
+        Task AddUserToCampaignAsync(UserEntity user, string campaignName);
+
         Task<bool> IsUserInRoleAsync(UserEntity user, string roleName);
 
     }

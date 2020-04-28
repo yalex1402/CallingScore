@@ -30,11 +30,12 @@ namespace CallingScore.Web.Data
         {
             await _dataContext.Database.EnsureCreatedAsync();
             await CheckRolesAsync();
-            UserEntity admin = await CheckUserAsync("cob1yga","1234", "Yesid", "Garcia", "yesidgarcialopez@gmail.com", "304 329 35 82", UserType.Admin);
-            UserEntity manager = await CheckUserAsync("cob1alg","1234", "Alexander", "Garcia", "yagarcia1402@gmail.com", "304 329 35 82", UserType.Supervisor);
-            UserEntity user = await CheckUserAsync("cob1ylg","1234", "Yesid", "Garcia", "yesidgarcia229967@correo.itm.edu.co", "304 329 35 82", UserType.CallAdviser);
-            UserEntity user2 = await CheckUserAsync("cob1ffb","1234", "Facundo", "Fortunatti", "fortunattibernard@gmail.com", "304 329 35 82", UserType.CallAdviser);
-            UserEntity user3 = await CheckUserAsync("cob1cml","1234", "Carolina", "Muñoz", "caroml98@hotmail.com", "304 329 35 82", UserType.CallAdviser);
+            await CheckCampaignsAsync();
+            UserEntity admin = await CheckUserAsync("cob1yga","1234", "Yesid", "Garcia", "yesidgarcialopez@gmail.com", "304 329 35 82", UserType.Admin,"Admin");
+            UserEntity supervisor = await CheckUserAsync("cob1alg","1234", "Alexander", "Garcia", "yagarcia1402@gmail.com", "304 329 35 82", UserType.Supervisor,"Linea Salida");
+            UserEntity user = await CheckUserAsync("cob1ylg","1234", "Yesid", "Garcia", "yesidgarcia229967@correo.itm.edu.co", "304 329 35 82", UserType.CallAdviser,"Linea Entrada");
+            UserEntity user2 = await CheckUserAsync("cob1ffb","1234", "Facundo", "Fortunatti", "fortunattibernard@gmail.com", "304 329 35 82", UserType.CallAdviser,"Linea Salida");
+            UserEntity user3 = await CheckUserAsync("cob1cml","1234", "Carolina", "Muñoz", "caroml98@hotmail.com", "304 329 35 82", UserType.CallAdviser,"Linea Salida");
             List<UserEntity> users = new List<UserEntity>();
             users.Add(user);
             users.Add(user2);
@@ -50,7 +51,8 @@ namespace CallingScore.Web.Data
            string lastName,
            string email,
            string phone,
-           UserType userType)
+           UserType userType,
+           string campaignName)
         {
             UserEntity user = await _userHelper.GetUserAsync(email);
             if (user == null)
@@ -69,7 +71,10 @@ namespace CallingScore.Web.Data
 
                 await _userHelper.AddUserAsync(user, "123456");
                 await _userHelper.AddUserToRoleAsync(user, userType.ToString());
-
+                if (campaignName != "Admin")
+                {
+                    await _userHelper.AddUserToCampaignAsync(user, campaignName);
+                }
             }
 
             return user;
@@ -163,6 +168,16 @@ namespace CallingScore.Web.Data
                     User = user
                 });
             }
+        }
+
+        private async Task CheckCampaignsAsync()
+        {
+            if (!_dataContext.Campaigns.Any())
+            {
+                _dataContext.Add(new CampaignEntity { Name = "Linea Entrada" });
+                _dataContext.Add(new CampaignEntity { Name = "Linea Salida" });
+            }
+            await _dataContext.SaveChangesAsync();
         }
     }
 }
