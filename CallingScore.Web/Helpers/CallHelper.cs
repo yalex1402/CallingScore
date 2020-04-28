@@ -28,6 +28,17 @@ namespace CallingScore.Web.Helpers
             return true;
         }
 
+        public async Task<bool> AddScoreToCall(MonitoringEntity monitoring)
+        {
+            if (monitoring == null)
+            {
+                return false;
+            }
+            _dataContext.Add(monitoring);
+            await _dataContext.SaveChangesAsync();
+            return true;
+        }
+
         public async Task<CallEntity> GetCall(int id)
         {
             CallEntity call = await _dataContext.Calls

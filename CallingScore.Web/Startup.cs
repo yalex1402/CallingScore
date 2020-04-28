@@ -54,6 +54,7 @@ namespace CallingScore.Web
             services.AddScoped<IUserHelper, UserHelper>();
             services.AddScoped<ICodificationHelper, CodificationHelper>();
             services.AddScoped<IArrivalsHelper, ArrivalsHelper>();
+            services.AddScoped<ICallHelper, CallHelper>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

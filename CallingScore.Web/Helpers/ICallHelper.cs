@@ -10,6 +10,8 @@ namespace CallingScore.Web.Helpers
     {
         Task<bool> AddCall(CallEntity call);
 
+        Task<bool> AddScoreToCall(MonitoringEntity monitoring);
+
         Task<CallEntity> GetCall(int id);
 
         Task<List<CallEntity>> GetCalls(string id, DateTime startDate, DateTime endDate);
