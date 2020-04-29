@@ -23,5 +23,15 @@ namespace CallingScore.Web.Data
         public DbSet<CampaignEntity> Campaigns { get; set; }
 
         public DbSet<CodificationEntity> Codifications { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<UserEntity>()
+                .HasIndex(u => u.UserCode)
+                .IsUnique();
+        }
+
     }
 }

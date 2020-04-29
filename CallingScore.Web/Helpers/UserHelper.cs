@@ -1,5 +1,6 @@
 ﻿using CallingScore.Web.Data;
 using CallingScore.Web.Data.Entities;
+using CallingScore.Web.Models;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -13,14 +14,17 @@ namespace CallingScore.Web.Helpers
         private readonly UserManager<UserEntity> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly DataContext _dataContext;
+        private readonly SignInManager<UserEntity> _signInManager;
 
         public UserHelper(
             UserManager<UserEntity> userManager,
             RoleManager<IdentityRole> roleManager,
+            SignInManager<UserEntity> signInManager,
             DataContext dataContext)
         {
             _userManager = userManager;
             _roleManager = roleManager;
+            _signInManager = signInManager;
             _dataContext = dataContext;
         }
         public async Task<IdentityResult> AddUserAsync(UserEntity user, string password)
@@ -67,6 +71,21 @@ namespace CallingScore.Web.Helpers
         {
             return await _userManager.IsInRoleAsync(user, roleName);
         }
+
+        public async Task<SignInResult> LoginAsync(LoginViewModel model)
+        {
+            return await _signInManager.PasswordSignInAsync(
+                model.Username,
+                model.Password,
+                model.RememberMe,
+                false);
+        }
+
+        public async Task LogoutAsync()
+        {
+            await _signInManager.SignOutAsync();
+        }
+
     }
 
 }

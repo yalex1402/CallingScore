@@ -1,4 +1,5 @@
 ﻿using CallingScore.Web.Data.Entities;
+using CallingScore.Web.Models;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -21,5 +22,8 @@ namespace CallingScore.Web.Helpers
 
         Task<bool> IsUserInRoleAsync(UserEntity user, string roleName);
 
+        Task<SignInResult> LoginAsync(LoginViewModel model);
+
+        Task LogoutAsync();
     }
 }
