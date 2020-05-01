@@ -80,6 +80,8 @@ namespace CallingScore.Web.Data
                 {
                     await _userHelper.AddUserToCampaignAsync(user, campaignName);
                 }
+                string token = await _userHelper.GenerateEmailConfirmationTokenAsync(user);
+                await _userHelper.ConfirmEmailAsync(user, token);
             }
 
             return user;

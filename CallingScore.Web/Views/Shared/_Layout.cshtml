@@ -35,7 +35,7 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
                     @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                     {
-                        <li><a asp-area="" asp-controller="Calls" asp-action="Index">Upload Calls</a></li>
+                        <li><a asp-area="" asp-controller="Calls" asp-action="UploadCalls">Upload Calls</a></li>
                     }
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
