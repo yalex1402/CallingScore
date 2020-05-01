@@ -10,6 +10,8 @@ namespace CallingScore.Web.Helpers
     {
         Task<bool> AddArrival(ArrivalsEntity arrival);
 
+        Task<bool> AddArrivals(List<ArrivalsEntity> arrivals);
+
         Task<List<ArrivalsEntity>> GetArrivals(string id);
 
         ArrivalsEntity GetArrival(int? id);

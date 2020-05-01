@@ -16,14 +16,17 @@ namespace CallingScore.Web.Controllers
         private readonly DataContext _dataContext;
         private readonly IConverterHelper _converterHelper;
         private readonly ICallHelper _callHelper;
+        private readonly IArrivalsHelper _arrivalsHelper;
 
         public CallsController(DataContext dataContext,
             IConverterHelper converterHelper,
-            ICallHelper callHelper)
+            ICallHelper callHelper,
+            IArrivalsHelper arrivalsHelper)
         {
             _dataContext = dataContext;
             _converterHelper = converterHelper;
             _callHelper = callHelper;
+            _arrivalsHelper = arrivalsHelper;
         }
 
         public IActionResult UploadCalls()
@@ -32,9 +35,9 @@ namespace CallingScore.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UploadCalls(UploadCallViewModel model)
+        public async Task<IActionResult> UploadCalls(UploadDataViewModel model)
         {
-            List<DataUploadedViewModel> dataUploaded = new List<DataUploadedViewModel>();
+            List<CallsUploadedViewModel> dataUploaded = new List<CallsUploadedViewModel>();
             try
             {
                 using (StreamReader reader = new StreamReader(model.File.OpenReadStream()))
@@ -42,7 +45,7 @@ namespace CallingScore.Web.Controllers
                     while (reader.Peek() >= 0)
                     {
                         string[] entries = (reader.ReadLine()).Split(";");
-                        DataUploadedViewModel data = new DataUploadedViewModel
+                        CallsUploadedViewModel data = new CallsUploadedViewModel
                         {
                             CustomerId = entries[0],
                             CustomerProduct = entries[1],
@@ -68,6 +71,48 @@ namespace CallingScore.Web.Controllers
                 ViewBag.Message = "There has been an error when trying to process the file";
             }
             
+            return View(model);
+        }
+
+        public IActionResult UploadArrivals()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UploadArrivals(UploadDataViewModel model)
+        {
+            List<ArrivalsUploadedViewModel> dataUploaded = new List<ArrivalsUploadedViewModel>();
+            try
+            {
+                using (StreamReader reader = new StreamReader(model.File.OpenReadStream()))
+                {
+                    while (reader.Peek() >= 0)
+                    {
+                        string[] entries = (reader.ReadLine()).Split(";");
+                        ArrivalsUploadedViewModel data = new ArrivalsUploadedViewModel
+                        {
+                            InDate = DateTime.Parse(entries[0]),
+                            OutDate = DateTime.Parse(entries[1]),
+                            UserCode = entries[2]
+                        };
+                        dataUploaded.Add(data);
+                    }
+                    List<ArrivalsEntity> arrivalsUploaded = _converterHelper.ToArrivalsEntity(dataUploaded);
+                    bool IsSuccess = await _arrivalsHelper.AddArrivals(arrivalsUploaded);
+                    if (!IsSuccess)
+                    {
+                        ViewBag.Message = "There has been an error when trying to process the file";
+                        return View(model);
+                    }
+                }
+                ViewBag.Message = $"The file {model.File.FileName} has been processed successfully!";
+            }
+            catch (Exception)
+            {
+                ViewBag.Message = "There has been an error when trying to process the file";
+            }
+
             return View(model);
         }
     }

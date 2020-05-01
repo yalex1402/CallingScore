@@ -9,6 +9,8 @@ namespace CallingScore.Web.Helpers
 {
     public interface IConverterHelper
     {
-        Task<List<CallEntity>> ToCallEntity(List<DataUploadedViewModel> model);
+        Task<List<CallEntity>> ToCallEntity(List<CallsUploadedViewModel> model);
+
+        List<ArrivalsEntity> ToArrivalsEntity(List<ArrivalsUploadedViewModel> model);
     }
 }

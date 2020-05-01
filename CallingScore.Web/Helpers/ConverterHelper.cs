@@ -26,10 +26,10 @@ namespace CallingScore.Web.Helpers
             _userHelper = userHelper;
         }
 
-        public async Task<List<CallEntity>> ToCallEntity (List<DataUploadedViewModel> model)
+        public async Task<List<CallEntity>> ToCallEntity (List<CallsUploadedViewModel> model)
         {
             List<CallEntity> calls = new List<CallEntity>();
-            foreach (DataUploadedViewModel item in model)
+            foreach (CallsUploadedViewModel item in model)
             {
                 CallEntity call = new CallEntity
                 {
@@ -44,5 +44,22 @@ namespace CallingScore.Web.Helpers
             }
             return calls;
         }
+
+        public List<ArrivalsEntity> ToArrivalsEntity(List<ArrivalsUploadedViewModel> model)
+        {
+            List<ArrivalsEntity> arrivals = new List<ArrivalsEntity>();
+            foreach (ArrivalsUploadedViewModel item in model)
+            {
+                ArrivalsEntity arrival = new ArrivalsEntity
+                {
+                     InDate = item.InDate,
+                     OutDate = item.OutDate,
+                     User = _userHelper.GetUserByCodeAsync(item.UserCode)
+                };
+                arrivals.Add(arrival);
+            }
+            return arrivals;
+        }
+
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CallingScore.Web.Models
 {
-    public class DataUploadedViewModel
+    public class CallsUploadedViewModel
     {
         [Required(ErrorMessage = "The field {0} is mandatory.")]
         public string CustomerId { get; set; }

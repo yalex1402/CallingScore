@@ -28,6 +28,20 @@ namespace CallingScore.Web.Helpers
             return true;
         }
 
+        public async Task<bool> AddArrivals(List<ArrivalsEntity> arrivals)
+        {
+            if (arrivals == null)
+            {
+                return false;
+            }
+            foreach (ArrivalsEntity arrival in arrivals)
+            {
+                _dataContext.Add(arrival);
+                await _dataContext.SaveChangesAsync();
+            }
+            return true;
+        }
+
         public ArrivalsEntity GetArrival(int? id)
         {
             ArrivalsEntity arrival = _dataContext.Arrivals

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CallingScore.Web.Models
 {
-    public class UploadCallViewModel
+    public class UploadDataViewModel
     {
         [Display(Name = "File Source")]
         [Required]
