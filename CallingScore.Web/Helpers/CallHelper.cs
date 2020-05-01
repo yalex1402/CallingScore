@@ -28,6 +28,20 @@ namespace CallingScore.Web.Helpers
             return true;
         }
 
+        public async Task<bool> AddCalls(List<CallEntity> calls)
+        {
+            if (calls == null)
+            {
+                return false;
+            }
+            foreach (CallEntity call in calls)
+            {
+                _dataContext.Add(call);
+                await _dataContext.SaveChangesAsync();
+            }
+            return true;
+        }
+
         public async Task<bool> AddScoreToCall(MonitoringEntity monitoring)
         {
             if (monitoring == null)
