@@ -1,0 +1,71 @@
+﻿@{
+    ViewData["Title"] = "Statistics Type";
+}
+
+<h1>Statistics Type:</h1>
+<h3>Select what kind of statistics do you need:</h3>
+<hr />
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+<br />
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Statistics Types</h3>
+            </div>
+            <div class="panel-body">
+                <table class="table table-hover table-responsive table-striped" id="ExpensesTable">
+
+                    <thead>
+                        <tr>
+                            <th>Logo</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <img src="~/images/Statistics/general_icon.png" alt="Image" style="width:100px;height:100px;max-width: 100%; height: auto;" />
+                            </td>
+                            <td>General Statistics</td>
+                            <td>
+                                These statistics show the general comportment in the Call Center
+                            </td>
+                            <td>
+                                <a asp-area="" asp-controller="Calls" asp-action="Statistics"><i class="glyphicon glyphicon-arrow-right"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img src="~/images/Statistics/supervisor_icon.png" alt="Image" style="width:100px;height:100px;max-width: 100%; height: auto;" />
+                            </td>
+                            <td>Supervisor Statistics</td>
+                            <td>
+                                These statistics show the supervisor's results
+                            </td>
+                            <td>
+                                <a asp-area="" asp-controller="Calls" asp-action="StatisticsBySupervisor"><i class="glyphicon glyphicon-arrow-right"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img src="~/images/Statistics/group_icon.png" alt="Image" style="width:100px;height:100px;max-width: 100%; height: auto;" />
+                            </td>
+                            <td>Campaign Statistics</td>
+                            <td>
+                                These statistics show the campaign's results
+                            </td>
+                            <td>
+                                <a asp-area="" asp-controller="Calls" asp-action="StatisticsByCampaign"><i class="glyphicon glyphicon-arrow-right"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

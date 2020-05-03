@@ -117,6 +117,11 @@ namespace CallingScore.Web.Controllers
             return View(model);
         }
 
+        public IActionResult StatisticsMain()
+        {
+            return View();
+        }
+
         public async Task<IActionResult> Statistics()
         {
             List<ContactStatisticsViewModel> statistics = await _dataContext.ContactStatistics
