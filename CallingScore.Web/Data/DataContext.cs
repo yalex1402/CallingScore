@@ -27,6 +27,8 @@ namespace CallingScore.Web.Data
 
         public DbQuery<ContactStatisticsViewModel> ContactStatistics { get; set; }
 
+        public DbQuery<EffectivityStatisticsViewModel> EffectivityStatistics { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
