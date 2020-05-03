@@ -3,6 +3,7 @@ using CallingScore.Web.Data.Entities;
 using CallingScore.Web.Helpers;
 using CallingScore.Web.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -113,6 +114,30 @@ namespace CallingScore.Web.Controllers
                 ViewBag.Message = "There has been an error when trying to process the file";
             }
 
+            return View(model);
+        }
+
+        public async Task<IActionResult> Contact()
+        {
+            List<ContactStatisticsViewModel> statistics = await _dataContext.ContactStatistics
+                .FromSql(@"
+                    SELECT DAY(c.StartDate) AS Day
+	                    , CONVERT(FLOAT,ROUND(((COUNT(c.CustomerId)*1.0/tab.Total_Contacto)*100),0)) AS PercentContact
+                    FROM Calls AS c 
+                    INNER JOIN Codifications AS cod 
+                    ON cod.Id = c.CodificationId
+                    INNER JOIN (SELECT DAY(c.StartDate) AS Dia
+				                    , COUNT(c.CustomerId) AS Total_Contacto
+			                    FROM Calls AS c
+			                    GROUP BY DAY(c.StartDate)) AS tab ON tab.Dia = DAY(c.StartDate)
+                    WHERE cod.ContactType = 0
+                    GROUP BY DAY(c.StartDate),tab.Total_Contacto
+                    ORDER BY DAY(c.StartDate) ASC
+                ").ToListAsync();
+            ToShowChartViewModel model = new ToShowChartViewModel
+            {
+                ContactStatistics = statistics
+            };
             return View(model);
         }
     }

@@ -1,5 +1,6 @@
 ﻿using CallingScore.Web.Data;
 using CallingScore.Web.Data.Entities;
+using CallingScore.Web.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace CallingScore.Web.Helpers
 
         public async Task<bool> AddCall(CallEntity call)
         {
-            if(call == null)
+            if (call == null)
             {
                 return false;
             }
@@ -69,9 +70,10 @@ namespace CallingScore.Web.Helpers
                 .Include(c => c.Codification)
                 .Include(c => c.User)
                 .ThenInclude(c => c.Monitorings)
-                .Where (c => c.User.Id == id && c.StartDate >= startDate && c.EndDate <= endDate)
+                .Where(c => c.User.Id == id && c.StartDate >= startDate && c.EndDate <= endDate)
                 .ToListAsync();
             return calls;
         }
+
     }
 }

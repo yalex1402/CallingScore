@@ -1,4 +1,5 @@
 ﻿using CallingScore.Web.Data.Entities;
+using CallingScore.Web.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -23,6 +24,8 @@ namespace CallingScore.Web.Data
         public DbSet<CampaignEntity> Campaigns { get; set; }
 
         public DbSet<CodificationEntity> Codifications { get; set; }
+
+        public DbQuery<ContactStatisticsViewModel> ContactStatistics { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
