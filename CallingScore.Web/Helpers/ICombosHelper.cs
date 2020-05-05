@@ -11,5 +11,7 @@ namespace CallingScore.Web.Helpers
         IEnumerable<SelectListItem> GetComboRoles();
 
         IEnumerable<SelectListItem> GetComboUsers();
+
+        IEnumerable<SelectListItem> GetComboCampaigns();
     }
 }

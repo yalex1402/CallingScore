@@ -49,5 +49,21 @@ namespace CallingScore.Web.Helpers
             }
             return list;
         }
+
+        public IEnumerable<SelectListItem> GetComboCampaigns()
+        {
+            List<CampaignEntity> campaigns = _dataContext.Campaigns.ToList();
+            List<SelectListItem> list = new List<SelectListItem>();
+            list.Add(new SelectListItem { Value = "0", Text = "[Select a campaign...]" });
+            foreach (CampaignEntity campaign in campaigns)
+            {
+                list.Add(new SelectListItem 
+                {
+                    Value = campaign.Id.ToString(),
+                    Text = campaign.Name
+                });
+            }
+            return list;
+        }
     }
 }
