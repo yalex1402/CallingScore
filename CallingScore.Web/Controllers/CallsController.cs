@@ -18,16 +18,22 @@ namespace CallingScore.Web.Controllers
         private readonly IConverterHelper _converterHelper;
         private readonly ICallHelper _callHelper;
         private readonly IArrivalsHelper _arrivalsHelper;
+        private readonly IUserHelper _userHelper;
+        private readonly ICombosHelper _combosHelper;
 
         public CallsController(DataContext dataContext,
             IConverterHelper converterHelper,
             ICallHelper callHelper,
-            IArrivalsHelper arrivalsHelper)
+            IArrivalsHelper arrivalsHelper,
+            IUserHelper userHelper,
+            ICombosHelper combosHelper)
         {
             _dataContext = dataContext;
             _converterHelper = converterHelper;
             _callHelper = callHelper;
             _arrivalsHelper = arrivalsHelper;
+            _userHelper = userHelper;
+            _combosHelper = combosHelper;
         }
 
         public IActionResult UploadCalls()
@@ -159,6 +165,30 @@ namespace CallingScore.Web.Controllers
                 ContactStatistics = statistics,
                 EffectivityStatistics = statistics2
             };
+            return View(model);
+        }
+
+        public IActionResult SelectUser()
+        {
+            ToShowCharByUserViewModel model = new ToShowCharByUserViewModel
+            {
+                Users = _combosHelper.GetComboUsers(),
+                ContactStatistics = null,
+                EffectivityStatistics = null
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> StatisticsByUser(ToShowCharByUserViewModel model)
+        {
+            UserEntity userId =  _userHelper.GetUserByCodeAsync(model.UserCode);
+            List<ContactStatisticsViewModel> statistics = await _dataContext.ContactStatistics
+                .FromSql($"SELECT DAY(c.StartDate) AS Day, CONVERT(FLOAT,ROUND(((COUNT(c.CustomerId)*1.0/tab.Total_Contacto)*100),0)) AS PercentContact FROM Calls AS c INNER JOIN Codifications AS cod  ON cod.Id = c.CodificationId INNER JOIN (SELECT DAY(c.StartDate) AS Dia, COUNT(c.CustomerId) AS Total_Contacto FROM Calls AS c WHERE c.UserId = {userId.Id} GROUP BY DAY(c.StartDate)) AS tab ON tab.Dia = DAY(c.StartDate) WHERE cod.ContactType = 0 AND c.UserId = {userId.Id} GROUP BY DAY(c.StartDate),tab.Total_Contacto ORDER BY DAY(c.StartDate) ASC").ToListAsync();
+            List<EffectivityStatisticsViewModel> statistics2 = await _dataContext.EffectivityStatistics
+                .FromSql($"SELECT DAY(c.StartDate) AS Day, CONVERT(FLOAT,ROUND(((COUNT(c.CustomerId)*1.0/tab.Total_Contacto)*100),0)) AS PercentEffectivity FROM Calls AS c INNER JOIN Codifications AS cod  ON cod.Id = c.CodificationId INNER JOIN (SELECT DAY(c.StartDate) AS Dia, COUNT(c.CustomerId) AS Total_Contacto FROM Calls AS c WHERE c.UserId = {userId.Id} GROUP BY DAY(c.StartDate)) AS tab ON tab.Dia = DAY(c.StartDate) WHERE cod.EffectivityType = 0 AND c.UserId = {userId.Id} GROUP BY DAY(c.StartDate),tab.Total_Contacto ORDER BY DAY(c.StartDate) ASC").ToListAsync();
+            model.ContactStatistics = statistics;
+            model.EffectivityStatistics = statistics2;
             return View(model);
         }
     }

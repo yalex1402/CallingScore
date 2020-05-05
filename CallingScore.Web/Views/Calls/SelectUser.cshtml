@@ -1,0 +1,27 @@
+﻿@model CallingScore.Web.Models.ToShowCharByUserViewModel
+
+@{
+    ViewData["Title"] = "Statistics By Users";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Statistics By User</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="StatisticsByUser" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="UserCode" class="control-label"></label>
+                <select asp-for="UserCode" asp-items="Model.Users" class="form-control"></select>
+                <span asp-validation-for="UserCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Show Statistics" class="btn btn-primary" />
+                <a asp-action="StatisticsMain" class="btn btn-success"><i class="glyphicon glyphicon-menu-left"></i>Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
