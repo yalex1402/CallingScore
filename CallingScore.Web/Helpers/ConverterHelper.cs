@@ -1,4 +1,5 @@
-﻿using CallingScore.Web.Data;
+﻿using CallingScore.Common.Models;
+using CallingScore.Web.Data;
 using CallingScore.Web.Data.Entities;
 using CallingScore.Web.Models;
 using System;
@@ -59,6 +60,26 @@ namespace CallingScore.Web.Helpers
                 arrivals.Add(arrival);
             }
             return arrivals;
+        }
+
+        public UserResponse ToUserResponse(UserEntity userEntity)
+        {
+            if (userEntity == null)
+            {
+                return null;
+            }
+            return new UserResponse
+            {
+                Id = userEntity.Id,
+                UserCode = userEntity.UserCode,
+                Document = userEntity.Document,
+                Email = userEntity.Email,
+                FirstName = userEntity.FirstName,
+                LastName = userEntity.LastName,
+                PhoneNumber = userEntity.PhoneNumber,
+                PicturePath = userEntity.PicturePath,
+                UserType = userEntity.UserType
+            };
         }
 
     }

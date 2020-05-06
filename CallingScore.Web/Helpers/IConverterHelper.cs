@@ -1,4 +1,5 @@
-﻿using CallingScore.Web.Data.Entities;
+﻿using CallingScore.Common.Models;
+using CallingScore.Web.Data.Entities;
 using CallingScore.Web.Models;
 using System;
 using System.Collections.Generic;
@@ -12,5 +13,7 @@ namespace CallingScore.Web.Helpers
         Task<List<CallEntity>> ToCallEntity(List<CallsUploadedViewModel> model);
 
         List<ArrivalsEntity> ToArrivalsEntity(List<ArrivalsUploadedViewModel> model);
+
+        UserResponse ToUserResponse(UserEntity userEntity);
     }
 }
