@@ -4,32 +4,42 @@ using CallingScore.Prism.ViewModels;
 using CallingScore.Prism.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Syncfusion.Licensing;
+using CallingScore.Common.Services;
+using CallingScore.Common.Helpers;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace CallingScore.Prism
 {
     public partial class App
     {
-        /* 
-         * The Xamarin Forms XAML Previewer in Visual Studio uses System.Activator.CreateInstance.
-         * This imposes a limitation in which the App class must have a default constructor. 
-         * App(IPlatformInitializer initializer = null) cannot be handled by the Activator.
-         */
+
         public App() : this(null) { }
 
         public App(IPlatformInitializer initializer) : base(initializer) { }
 
         protected override async void OnInitialized()
         {
+            SyncfusionLicenseProvider.RegisterLicense("MjUzNzIyQDMxMzgyZTMxMmUzME4vZWNpMVo5VGs0cDlzUjlnYUtzSFZDdDlwZjJsMXVRRkVpYm9XOE9BUmM9");
             InitializeComponent();
-
-            await NavigationService.NavigateAsync("NavigationPage/MainPage");
+            if (Settings.IsLogin)
+            {
+                await NavigationService.NavigateAsync("/CallingScoreMasterDetailPage/NavigationPage/HomePage");
+                return;
+            }
+            await NavigationService.NavigateAsync("CallingScoreMasterDetailPage/NavigationPage/LoginPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.Register<IApiService, ApiService>();
             containerRegistry.RegisterForNavigation<NavigationPage>();
-            containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
+            containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
+            containerRegistry.RegisterForNavigation<RegisterPage, RegisterPageViewModel>();
+            containerRegistry.RegisterForNavigation<RememberPasswordPage, RememberPasswordPageViewModel>();
+            containerRegistry.RegisterForNavigation<CallingScoreMasterDetailPage, CallingScoreMasterDetailPageViewModel>();
+            containerRegistry.RegisterForNavigation<ModifyUserPage, ModifyUserPageViewModel>();
+            containerRegistry.RegisterForNavigation<HomePage, HomePageViewModel>();
         }
     }
 }
