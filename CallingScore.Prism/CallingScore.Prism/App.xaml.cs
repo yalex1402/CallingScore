@@ -43,6 +43,7 @@ namespace CallingScore.Prism
             containerRegistry.RegisterForNavigation<ModifyUserPage, ModifyUserPageViewModel>();
             containerRegistry.RegisterForNavigation<HomePage, HomePageViewModel>();
             containerRegistry.RegisterForNavigation<ShowStatisticsPage, ShowStatisticsPageViewModel>();
+            containerRegistry.RegisterForNavigation<ChangePasswordPage, ChangePasswordPageViewModel>();
         }
     }
 }
