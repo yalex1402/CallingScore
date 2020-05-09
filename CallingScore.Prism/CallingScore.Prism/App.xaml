@@ -7,6 +7,7 @@
 
         <!-- Parameters -->
         <x:String x:Key="UrlAPI">https://callingscoreweb.azurewebsites.net/</x:String>
+        <x:String x:Key="UrlNoImage">https://callingscoreweb.azurewebsites.net/images/noimage.png</x:String>
 
         <!-- Colors -->
         <Color x:Key="ColorBackground">#193C40</Color>
@@ -30,7 +31,15 @@
         </Style>
 
         <Style TargetType="Entry">
-            <Setter Property="BackgroundColor" Value="{StaticResource ColorFontInverse}" />
+            <Setter Property="BackgroundColor" Value="{StaticResource ColorBackground}" />
+            <Setter Property="TextColor" Value="{StaticResource ColorFont}"/>
+            <Setter Property="PlaceholderColor" Value="{StaticResource ColorFont}" />
+        </Style>
+
+        <Style TargetType="Picker">
+            <Setter Property="BackgroundColor" Value="{StaticResource ColorBackground}" />
+            <Setter Property="TextColor" Value="{StaticResource ColorFont}"/>
+            <Setter Property="TitleColor" Value="{StaticResource ColorFont}"/>
         </Style>
 
         <Style x:Key="SecondaryButton" TargetType="Button">

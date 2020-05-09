@@ -83,9 +83,15 @@ namespace CallingScore.Prism.ViewModels
             {
                 new Menu
                 {
-                    Icon = "ic_refresh",
+                    Icon = "ic_home",
                     PageName = "HomePage",
                     Title = "Home"
+                },
+                new Menu
+                {
+                    Icon = "ic_bar_chart",
+                    PageName = "ShowStatisticsPage",
+                    Title = "Show Statistics"
                 },
                 new Menu
                 {

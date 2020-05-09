@@ -15,6 +15,27 @@
                            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=X,Factor=1,Constant=60}"
                            HeightRequest="150"
                            Source="icon_v2.png"/>
+                    <ffimageloading:CachedImage x:Name="Picture" 
+                                                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=Logo,Property=Y,Factor=1,Constant=30}"
+                                                Aspect="AspectFit"
+                                                Source="{Binding User.PictureFullPath}" 
+                                                CacheDuration= "50"
+                                                HeightRequest="100"
+                                                Margin="5"
+                                                RetryCount= "3"
+                                                RetryDelay= "600">
+                        <ffimageloading:CachedImage.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ModifyUserCommand}"/>
+                        </ffimageloading:CachedImage.GestureRecognizers>
+                        <ffimageloading:CachedImage.Transformations>
+                            <fftransformations:CircleTransformation />
+                        </ffimageloading:CachedImage.Transformations>
+                    </ffimageloading:CachedImage>
+                    <Label RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=Picture,Property=Y,Factor=1,Constant=110}"
+                           FontAttributes="Bold"
+                           FontSize="Large"
+                           Text="{Binding User.FullName}"
+                           TextColor="Black"/>
                 </RelativeLayout>
                 <ListView BackgroundColor="Transparent"
                 	      ItemsSource="{Binding Menus}"

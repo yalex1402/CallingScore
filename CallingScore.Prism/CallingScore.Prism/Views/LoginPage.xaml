@@ -28,7 +28,6 @@
                            VerticalOptions="Center"/>
                     <Entry Grid.Column="1"
                            Grid.Row="0"
-                           BackgroundColor="{StaticResource ColorFontInverse}"
                            Keyboard="Email"
                            Placeholder="Enter your email address"
                            Text="{Binding Email}"/>
@@ -39,7 +38,6 @@
                            VerticalOptions="Center"/>
                     <Entry Grid.Column="1"
                            Grid.Row="1"
-                           BackgroundColor="{StaticResource ColorFontInverse}"
                            IsPassword="True"
                            Placeholder="Enter your password"
                            Text="{Binding Password}"/>
