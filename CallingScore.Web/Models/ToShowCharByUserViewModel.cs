@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using CallingScore.Common.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CallingScore.Web.Models
 {
-    public class ToShowCharByUserViewModel : ToShowChartViewModel
+    public class ToShowCharByUserViewModel : ToShowChart
     {
         [Display(Name ="User Name")]
         public string UserCode { get; set; }

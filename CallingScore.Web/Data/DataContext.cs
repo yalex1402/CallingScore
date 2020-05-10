@@ -1,4 +1,5 @@
-﻿using CallingScore.Web.Data.Entities;
+﻿using CallingScore.Common.Models;
+using CallingScore.Web.Data.Entities;
 using CallingScore.Web.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -25,9 +26,9 @@ namespace CallingScore.Web.Data
 
         public DbSet<CodificationEntity> Codifications { get; set; }
 
-        public DbQuery<ContactStatisticsViewModel> ContactStatistics { get; set; }
+        public DbQuery<ContactStatistics> ContactStatistics { get; set; }
 
-        public DbQuery<EffectivityStatisticsViewModel> EffectivityStatistics { get; set; }
+        public DbQuery<EffectivityStatistics> EffectivityStatistics { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

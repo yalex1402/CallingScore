@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace CallingScore.Web.Models
+namespace CallingScore.Common.Models
 {
-    public class EffectivityStatisticsViewModel
+    public class EffectivityStatistics
     {
         public int Day { get; set; }
 

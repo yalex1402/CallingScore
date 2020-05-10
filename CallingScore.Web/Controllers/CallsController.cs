@@ -1,4 +1,5 @@
-﻿using CallingScore.Web.Data;
+﻿using CallingScore.Common.Models;
+using CallingScore.Web.Data;
 using CallingScore.Web.Data.Entities;
 using CallingScore.Web.Helpers;
 using CallingScore.Web.Models;
@@ -130,7 +131,7 @@ namespace CallingScore.Web.Controllers
 
         public async Task<IActionResult> Statistics()
         {
-            List<ContactStatisticsViewModel> statistics = await _dataContext.ContactStatistics
+            List<ContactStatistics> statistics = await _dataContext.ContactStatistics
                 .FromSql(@"
                     SELECT DAY(c.StartDate) AS Day
 	                    , CONVERT(FLOAT,ROUND(((COUNT(c.CustomerId)*1.0/tab.Total_Contacto)*100),0)) AS PercentContact
@@ -145,7 +146,7 @@ namespace CallingScore.Web.Controllers
                     GROUP BY DAY(c.StartDate),tab.Total_Contacto
                     ORDER BY DAY(c.StartDate) ASC
                 ").ToListAsync();
-            List<EffectivityStatisticsViewModel> statistics2 = await _dataContext.EffectivityStatistics
+            List<EffectivityStatistics> statistics2 = await _dataContext.EffectivityStatistics
                 .FromSql(@"
                     SELECT DAY(c.StartDate) AS Day
 	                    , CONVERT(FLOAT,ROUND(((COUNT(c.CustomerId)*1.0/tab.Total_Contacto)*100),0)) AS PercentEffectivity
@@ -160,7 +161,7 @@ namespace CallingScore.Web.Controllers
                     GROUP BY DAY(c.StartDate),tab.Total_Contacto
                     ORDER BY DAY(c.StartDate) ASC
                 ").ToListAsync();
-            ToShowChartViewModel model = new ToShowChartViewModel
+            ToShowChart model = new ToShowChart
             {
                 ContactStatistics = statistics,
                 EffectivityStatistics = statistics2
@@ -181,9 +182,9 @@ namespace CallingScore.Web.Controllers
         public async Task<IActionResult> StatisticsByUser(ToShowCharByUserViewModel model)
         {
             UserEntity userId =  _userHelper.GetUserByCodeAsync(model.UserCode);
-            List<ContactStatisticsViewModel> statistics = await _dataContext.ContactStatistics
+            List<ContactStatistics> statistics = await _dataContext.ContactStatistics
                 .FromSql($"SELECT DAY(c.StartDate) AS Day, CONVERT(FLOAT,ROUND(((COUNT(c.CustomerId)*1.0/tab.Total_Contacto)*100),0)) AS PercentContact FROM Calls AS c INNER JOIN Codifications AS cod  ON cod.Id = c.CodificationId INNER JOIN (SELECT DAY(c.StartDate) AS Dia, COUNT(c.CustomerId) AS Total_Contacto FROM Calls AS c WHERE c.UserId = {userId.Id} GROUP BY DAY(c.StartDate)) AS tab ON tab.Dia = DAY(c.StartDate) WHERE cod.ContactType = 0 AND c.UserId = {userId.Id} GROUP BY DAY(c.StartDate),tab.Total_Contacto ORDER BY DAY(c.StartDate) ASC").ToListAsync();
-            List<EffectivityStatisticsViewModel> statistics2 = await _dataContext.EffectivityStatistics
+            List<EffectivityStatistics> statistics2 = await _dataContext.EffectivityStatistics
                 .FromSql($"SELECT DAY(c.StartDate) AS Day, CONVERT(FLOAT,ROUND(((COUNT(c.CustomerId)*1.0/tab.Total_Contacto)*100),0)) AS PercentEffectivity FROM Calls AS c INNER JOIN Codifications AS cod  ON cod.Id = c.CodificationId INNER JOIN (SELECT DAY(c.StartDate) AS Dia, COUNT(c.CustomerId) AS Total_Contacto FROM Calls AS c WHERE c.UserId = {userId.Id} GROUP BY DAY(c.StartDate)) AS tab ON tab.Dia = DAY(c.StartDate) WHERE cod.EffectivityType = 0 AND c.UserId = {userId.Id} GROUP BY DAY(c.StartDate),tab.Total_Contacto ORDER BY DAY(c.StartDate) ASC").ToListAsync();
             model.ContactStatistics = statistics;
             model.EffectivityStatistics = statistics2;
@@ -202,9 +203,9 @@ namespace CallingScore.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> StatisticsByCampaign(ToShowCharByCampaignViewModel model)
         {
-            List<ContactStatisticsViewModel> statistics = await _dataContext.ContactStatistics
+            List<ContactStatistics> statistics = await _dataContext.ContactStatistics
                 .FromSql($"SELECT DAY(c.StartDate) AS Day,CONVERT(FLOAT,ROUND(((COUNT(c.CustomerId)*1.0/tab.Total_Contacto)*100),0)) AS PercentContact FROM Calls AS c INNER JOIN Codifications AS cod  ON cod.Id = c.CodificationId INNER JOIN AspNetUsers AS u ON u.Id = c.UserId  INNER JOIN (SELECT DAY(c.StartDate) AS Dia, COUNT(c.CustomerId) AS Total_Contacto FROM Calls AS c INNER JOIN AspNetUsers AS u ON u.Id = c.UserId WHERE u.CampaignId ={model.CampaignId} GROUP BY DAY(c.StartDate)) AS tab ON tab.Dia = DAY(c.StartDate) WHERE cod.ContactType = 0 AND u.CampaignId ={model.CampaignId} GROUP BY DAY(c.StartDate),tab.Total_Contacto ORDER BY DAY(c.StartDate) ASC").ToListAsync();
-            List<EffectivityStatisticsViewModel> statistics2 = await _dataContext.EffectivityStatistics
+            List<EffectivityStatistics> statistics2 = await _dataContext.EffectivityStatistics
                 .FromSql($"SELECT DAY(c.StartDate) AS Day,CONVERT(FLOAT,ROUND(((COUNT(c.CustomerId)*1.0/tab.Total_Contacto)*100),0)) AS PercentEffectivity FROM Calls AS c INNER JOIN Codifications AS cod  ON cod.Id = c.CodificationId INNER JOIN AspNetUsers AS u ON u.Id = c.UserId  INNER JOIN (SELECT DAY(c.StartDate) AS Dia, COUNT(c.CustomerId) AS Total_Contacto FROM Calls AS c INNER JOIN AspNetUsers AS u ON u.Id = c.UserId WHERE u.CampaignId ={model.CampaignId} GROUP BY DAY(c.StartDate)) AS tab ON tab.Dia = DAY(c.StartDate) WHERE cod.EffectivityType = 0 AND u.CampaignId ={model.CampaignId} GROUP BY DAY(c.StartDate),tab.Total_Contacto ORDER BY DAY(c.StartDate) ASC").ToListAsync();
             model.ContactStatistics = statistics;
             model.EffectivityStatistics = statistics2;
