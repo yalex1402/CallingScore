@@ -59,9 +59,18 @@ namespace CallingScore.Web.Controllers.API
             }
             List<ContactStatistics> statistics = await _dataContext.ContactStatistics
                 .FromSql(
-                $"SELECT DAY(c.StartDate) AS Day, CONVERT(FLOAT,ROUND(((COUNT(c.CustomerId)*1.0/tab.Total_Contacto)*100),0)) AS PercentContact FROM Calls AS c INNER JOIN Codifications AS cod  ON cod.Id = c.CodificationId INNER JOIN (SELECT DAY(c.StartDate) AS Dia, COUNT(c.CustomerId) AS Total_Contacto FROM Calls AS c WHERE c.CampaignId = {request.CampaignId} AND MONTH(c.StartDate) = {request.Month} GROUP BY DAY(c.StartDate)) AS tab ON tab.Dia = DAY(c.StartDate) WHERE cod.ContactType = 0 AND c.CampaignId = {request.CampaignId} AND MONTH(c.StartDate) = {request.Month} GROUP BY DAY(c.StartDate),tab.Total_Contacto ORDER BY DAY(c.StartDate) ASC"
+                $"SELECT DAY(c.StartDate) AS Day, CONVERT(FLOAT,ROUND(((COUNT(c.CustomerId)*1.0/tab.Total_Contacto)*100),0)) AS PercentContact FROM Calls AS c INNER JOIN Codifications AS cod  ON cod.Id = c.CodificationId INNER JOIN AspNetUsers AS u ON u.Id = c.UserId INNER JOIN (SELECT DAY(c.StartDate) AS Dia,COUNT(c.CustomerId) AS Total_Contacto FROM Calls AS c INNER JOIN AspNetUsers AS u ON u.Id = c.UserId WHERE u.CampaignId = {request.CampaignId} AND MONTH(c.StartDate) = {request.Month} GROUP BY DAY(c.StartDate)) AS tab ON tab.Dia = DAY(c.StartDate) WHERE cod.ContactType = 0 AND u.CampaignId = {request.CampaignId} AND MONTH(c.StartDate) = {request.Month} GROUP BY DAY(c.StartDate),tab.Total_Contacto ORDER BY DAY(c.StartDate) ASC"
                 ).ToListAsync();
-            return null;
+            List<EffectivityStatistics> statistics2 = await _dataContext.EffectivityStatistics
+                .FromSql(
+                $"SELECT DAY(c.StartDate) AS Day, CONVERT(FLOAT,ROUND(((COUNT(c.CustomerId)*1.0/tab.Total_Contacto)*100),0)) AS PercentEffectivity FROM Calls AS c INNER JOIN Codifications AS cod  ON cod.Id = c.CodificationId INNER JOIN AspNetUsers AS u ON u.Id = c.UserId INNER JOIN (SELECT DAY(c.StartDate) AS Dia,COUNT(c.CustomerId) AS Total_Contacto FROM Calls AS c INNER JOIN AspNetUsers AS u ON u.Id = c.UserId WHERE u.CampaignId = {request.CampaignId} AND MONTH(c.StartDate) = {request.Month} GROUP BY DAY(c.StartDate)) AS tab ON tab.Dia = DAY(c.StartDate) WHERE cod.EffectivityType = 0 AND u.CampaignId = {request.CampaignId} AND MONTH(c.StartDate) = {request.Month} GROUP BY DAY(c.StartDate),tab.Total_Contacto ORDER BY DAY(c.StartDate) ASC"
+                ).ToListAsync();
+            ToShowChart response = new ToShowChart
+            {
+                ContactStatistics = statistics,
+                EffectivityStatistics = statistics2
+            };
+            return Ok(response);
         }
 
     }
