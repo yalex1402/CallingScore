@@ -33,6 +33,13 @@ namespace CallingScore.Web.Models
         [Range(1, int.MaxValue, ErrorMessage = "You must select a role.")]
         public int UserTypeId { get; set; }
 
+        [Required(ErrorMessage = "The field {0} is mandatory.")]
+        [Display(Name = "Campaign")]
+        [Range(1, int.MaxValue, ErrorMessage = "You must select a campaing.")]
+        public int CampaignId { get; set; }
+
         public IEnumerable<SelectListItem> UserTypes { get; set; }
+
+        public IEnumerable<SelectListItem> Campaigns { get; set; }
     }
 }

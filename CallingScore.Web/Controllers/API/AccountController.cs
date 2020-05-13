@@ -23,18 +23,21 @@ namespace CallingScore.Web.Controllers.API
         private readonly IImageHelper _imageHelper;
         private readonly IMailHelper _mailHelper;
         private readonly IConverterHelper _converterHelper;
+        private readonly ICampaignHelper _campaignHelper;
 
         public AccountController(DataContext dataContext,
             IUserHelper userHelper,
             IImageHelper imageHelper,
             IMailHelper mailHelper,
-            IConverterHelper converterHelper)
+            IConverterHelper converterHelper,
+            ICampaignHelper campaignHelper)
         {
             _dataContext = dataContext;
             _userHelper = userHelper;
             _imageHelper = imageHelper;
             _mailHelper = mailHelper;
             _converterHelper = converterHelper;
+            _campaignHelper = campaignHelper;
         }
 
         [HttpPost]
@@ -77,7 +80,8 @@ namespace CallingScore.Web.Controllers.API
                 PhoneNumber = request.Phone,
                 UserName = request.Email,
                 PicturePath = picturePath,
-                UserType = request.UserTypeId == 1 ? UserType.Supervisor : UserType.CallAdviser
+                UserType = request.UserTypeId == 1 ? UserType.Supervisor : UserType.CallAdviser,
+                Campaign = await _campaignHelper.GetCampaign(request.CampaignId)
             };
 
             IdentityResult result = await _userHelper.AddUserAsync(user, request.Password);

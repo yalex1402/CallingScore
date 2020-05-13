@@ -82,7 +82,8 @@ namespace CallingScore.Web.Controllers
         {
             AddUserViewModel model = new AddUserViewModel
             {
-                UserTypes = _combosHelper.GetComboRoles()
+                UserTypes = _combosHelper.GetComboRoles(),
+                Campaigns = _combosHelper.GetComboCampaigns()
             };
 
             return View(model);
@@ -131,6 +132,7 @@ namespace CallingScore.Web.Controllers
             }
 
             model.UserTypes = _combosHelper.GetComboRoles();
+            model.Campaigns = _combosHelper.GetComboCampaigns();
             return View(model);
         }
 

@@ -25,7 +25,9 @@ namespace CallingScore.Prism.ViewModels
         private ImageSource _image;
         private UserRequest _user;
         private Role _role;
+        private Campaign _campaign;
         private ObservableCollection<Role> _roles;
+        private ObservableCollection<Campaign> _campaigns;
         private bool _isRunning;
         private bool _isEnabled;
         private DelegateCommand _registerCommand;
@@ -47,6 +49,7 @@ namespace CallingScore.Prism.ViewModels
             IsEnabled = true;
             User = new UserRequest();
             Roles = new ObservableCollection<Role>(CombosHelper.GetRoles());
+            Campaigns = new ObservableCollection<Campaign>(CombosHelper.GetCampaigns());
         }
 
         public DelegateCommand RegisterCommand => _registerCommand ?? (_registerCommand = new DelegateCommand(RegisterAsync));
@@ -75,6 +78,18 @@ namespace CallingScore.Prism.ViewModels
         {
             get => _roles;
             set => SetProperty(ref _roles, value);
+        }
+
+        public Campaign Campaign
+        {
+            get => _campaign;
+            set => SetProperty(ref _campaign, value);
+        }
+
+        public ObservableCollection<Campaign> Campaigns
+        {
+            get => _campaigns;
+            set => SetProperty(ref _campaigns, value);
         }
 
         public bool IsRunning
@@ -117,6 +132,7 @@ namespace CallingScore.Prism.ViewModels
 
             User.PictureArray = imageArray;
             User.UserTypeId = Role.Id;
+            User.CampaignId = Campaign.Id;
             User.CultureInfo = "es";
             Response response = await _apiService.RegisterUserAsync(url, "/api", "/Account", User);
             IsRunning = false;
@@ -148,9 +164,9 @@ namespace CallingScore.Prism.ViewModels
                 return false;
             }
 
-            if (Role == null)
+            if (Role == null || Campaign == null)
             {
-                await App.Current.MainPage.DisplayAlert("Error", "You must select an user role", "Accept");
+                await App.Current.MainPage.DisplayAlert("Error", "You must select an user role and a campaign", "Accept");
                 return false;
             }
 

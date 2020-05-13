@@ -15,6 +15,15 @@ namespace CallingScore.Prism.Helpers
                 new Role { Id = 2, Name = "Call Adviser" }
             };
         }
+
+        public static List<Campaign> GetCampaigns()
+        {
+            return new List<Campaign>
+            {
+                new Campaign { Id = 1, Name = "Linea Entrada" },
+                new Campaign { Id = 2, Name = "Linea Salida" }
+            };
+        }
     }
 
 }

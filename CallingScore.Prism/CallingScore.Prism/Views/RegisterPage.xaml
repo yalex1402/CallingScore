@@ -47,6 +47,7 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
                         <Label Grid.Row="0"
@@ -128,6 +129,19 @@
                                 SelectedItem="{Binding Role}"
                                 Title="Select a role">
                         </Picker>
+
+                        <Label Grid.Row="9"
+                               Grid.Column="0"
+                               Text="Campaign"
+                               VerticalOptions="Center"/>
+                        <Picker Grid.Row="9"
+                                Grid.Column="1"
+                                ItemDisplayBinding="{Binding Name}"
+                                ItemsSource="{Binding Campaigns}"
+                                SelectedItem="{Binding Campaign}"
+                                Title="Select a campaign">
+                        </Picker>
+
                     </Grid>
                 </StackLayout>
             </ScrollView>

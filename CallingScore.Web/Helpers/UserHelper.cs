@@ -3,6 +3,7 @@ using CallingScore.Web.Data;
 using CallingScore.Web.Data.Entities;
 using CallingScore.Web.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -171,6 +172,15 @@ namespace CallingScore.Web.Helpers
             user.Campaign = campaign;
             _dataContext.Update(user);
             await _dataContext.SaveChangesAsync();
+        }
+
+        public async Task<List<UserEntity>> GetUsersByCampaign(int campaignId)
+        {
+            List<UserEntity> users = await _dataContext.Users
+                .Include(u => u.Campaign)
+                .Where(u => u.Campaign.Id == campaignId)
+                .ToListAsync();
+            return users;
         }
     }
 

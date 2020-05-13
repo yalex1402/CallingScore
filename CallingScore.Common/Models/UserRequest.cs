@@ -29,6 +29,9 @@ namespace CallingScore.Common.Models
         [Required]
         public int UserTypeId { get; set; } // 1: Supervisor , 2: CallAdviser
 
+        [Required]
+        public int CampaignId { get; set; } // 1: Linea Entrada , 2: Linea Salida
+
         public byte[] PictureArray { get; set; }
 
         public string PasswordConfirm { get; set; }

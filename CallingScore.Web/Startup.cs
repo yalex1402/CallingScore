@@ -77,6 +77,7 @@ namespace CallingScore.Web
             services.AddScoped<ICodificationHelper, CodificationHelper>();
             services.AddScoped<IArrivalsHelper, ArrivalsHelper>();
             services.AddScoped<ICallHelper, CallHelper>();
+            services.AddScoped<ICampaignHelper, CampaignHelper>();
             services.AddScoped<ICombosHelper, CombosHelper>();
             services.AddScoped<IImageHelper, ImageHelper>();
             services.AddScoped<IMailHelper, MailHelper>();
