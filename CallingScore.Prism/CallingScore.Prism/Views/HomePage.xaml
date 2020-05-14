@@ -2,9 +2,46 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
+             xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="CallingScore.Prism.Views.HomePage"
              Title="{Binding Title}"
              BackgroundColor="{StaticResource ColorBackground}">
+
+    <AbsoluteLayout>
+        <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
+                         AbsoluteLayout.LayoutFlags="All" 
+                         Padding="5">
+            <Image HeightRequest="200"
+                       Margin="0,20,0,0"
+                       Source="icon_v2.png"/>
+            <Label Text="Calling Score"
+                       FontSize="Large"
+                       FontAttributes="Bold"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                    />
+            <Label HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       Text="Welcome to Calling Score, To show the statistics click the button..."
+                    />
+            <StackLayout>
+                <Button Command="{Binding ShowStatisticsCommand}" 
+                        Text="Show Statistics"
+                        VerticalOptions="EndAndExpand"/>
+            </StackLayout>
+        </StackLayout>
+        <busyindicator:SfBusyIndicator AnimationType="ZoomingTarget" 
+                                       AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
+                	                   AbsoluteLayout.LayoutFlags="All"
+                	                   BackgroundColor="{StaticResource ColorAccent}"
+                	                   HorizontalOptions="Center"
+                	                   TextColor="{StaticResource ColorFontInverse}"
+                	                   IsVisible="{Binding IsRunning}"
+                	                   Title="Loading..."
+                	                   VerticalOptions="Center"
+                	                   ViewBoxWidth="80"
+                	                   ViewBoxHeight="80" />
+    </AbsoluteLayout>
   
 </ContentPage>

@@ -22,7 +22,10 @@ namespace CallingScore.Common.Services
             return await CrossConnectivity.Current.IsRemoteReachable(url);
         }
 
-        public async Task<Response> GetTokenAsync(string urlBase, string servicePrefix, string controller, TokenRequest request)
+        public async Task<Response> GetTokenAsync(string urlBase, 
+            string servicePrefix, 
+            string controller, 
+            TokenRequest request)
         {
             try
             {
@@ -141,7 +144,10 @@ namespace CallingScore.Common.Services
             }
         }
 
-        public async Task<Response> RecoverPasswordAsync(string urlBase, string servicePrefix, string controller, EmailRequest emailRequest)
+        public async Task<Response> RecoverPasswordAsync(string urlBase, 
+            string servicePrefix, 
+            string controller, 
+            EmailRequest emailRequest)
         {
             try
             {
@@ -168,7 +174,12 @@ namespace CallingScore.Common.Services
             }
         }
 
-        public async Task<Response> ChangePasswordAsync(string urlBase, string servicePrefix, string controller, ChangePasswordRequest changePasswordRequest, string tokenType, string accessToken)
+        public async Task<Response> ChangePasswordAsync(string urlBase, 
+            string servicePrefix, 
+            string controller, 
+            ChangePasswordRequest changePasswordRequest, 
+            string tokenType, 
+            string accessToken)
         {
             try
             {
@@ -196,7 +207,12 @@ namespace CallingScore.Common.Services
             }
         }
 
-        public async Task<Response> PutAsync<T>(string urlBase, string servicePrefix, string controller, T model, string tokenType, string accessToken)
+        public async Task<Response> PutAsync<T>(string urlBase, 
+            string servicePrefix, 
+            string controller, 
+            T model, 
+            string tokenType, 
+            string accessToken)
         {
             try
             {
@@ -233,6 +249,53 @@ namespace CallingScore.Common.Services
                 {
                     IsSuccess = false,
                     Message = ex.Message,
+                };
+            }
+        }
+
+        public async Task<Response> GetStatistics(string urlBase,
+            string servicePrefix,
+            string controller,
+            string tokenType,
+            string accessToken,
+            StatisticsRequest request)
+        {
+            try
+            {
+                string requestString = JsonConvert.SerializeObject(request);
+                StringContent content = new StringContent(requestString, Encoding.UTF8, "application/json");
+                HttpClient client = new HttpClient
+                {
+                    BaseAddress = new Uri(urlBase)
+                };
+
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(tokenType, accessToken);
+                string url = $"{servicePrefix}{controller}";
+                HttpResponseMessage response = await client.PostAsync(url, content);
+                string result = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response
+                    {
+                        IsSuccess = false,
+                        Message = result,
+                    };
+                }
+
+                ToShowChart statisticsResponse = JsonConvert.DeserializeObject<ToShowChart>(result);
+                return new Response
+                {
+                    IsSuccess = true,
+                    Result = statisticsResponse
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Response
+                {
+                    IsSuccess = false,
+                    Message = ex.Message
                 };
             }
         }
