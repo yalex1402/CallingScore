@@ -20,6 +20,8 @@ namespace CallingScore.Prism.ViewModels
         private ToShowChart _chart;
         private ObservableCollection<StatisticsType> _statisticsTypes;
         private StatisticsType _statisticType;
+        private ObservableCollection<Month> _months;
+        private Month _month;
         private DelegateCommand _showStatisticsCommand;
         private bool _isVisible;
         private bool _isVisibleContact;
@@ -34,6 +36,7 @@ namespace CallingScore.Prism.ViewModels
             IsVisible = false;
             Chart = new ToShowChart();
             StatisticsTypes = new ObservableCollection<StatisticsType>(CombosHelper.GetStatisticsTypes());
+            Months = new ObservableCollection<Month>(CombosHelper.GetMonths());
         }
 
         public DelegateCommand ShowStatisticsCommand => _showStatisticsCommand ?? (_showStatisticsCommand = new DelegateCommand(ShowStatisticsAsync));
@@ -74,6 +77,18 @@ namespace CallingScore.Prism.ViewModels
             set => SetProperty(ref _statisticType, value);
         }
 
+        public ObservableCollection<Month> Months
+        {
+            get => _months;
+            set => SetProperty(ref _months, value);
+        }
+
+        public Month MonthSelected
+        {
+            get => _month;
+            set => SetProperty(ref _month, value);
+        }
+
         private async void LoadChart()
         {
             string url = App.Current.Resources["UrlAPI"].ToString();
@@ -88,7 +103,7 @@ namespace CallingScore.Prism.ViewModels
             StatisticsRequest request = new StatisticsRequest
             {
                 UserCode = userResponse.UserCode,
-                Month = 4
+                Month = MonthSelected.Id
             };
             Response response = await _apiService.GetStatistics(url, "api", "/Calls/MyStatistics", "bearer", token.Token, request);
             if (!response.IsSuccess)
@@ -100,7 +115,7 @@ namespace CallingScore.Prism.ViewModels
             IsVisible = true;
         }
 
-        private async void ShowStatisticsAsync()
+        private void ShowStatisticsAsync()
         {
             LoadChart();
             if (StatisticType.Name == "Contact")

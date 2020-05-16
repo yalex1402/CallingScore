@@ -4,10 +4,10 @@ using System.Text;
 
 namespace CallingScore.Common.Models
 {
-    public class Statistics
+    public class Month
     {
-        public int Day { get; set; }
+        public int Id { get; set; }
 
-        public double Percent { get; set; }
+        public string Name { get; set; }
     }
 }
