@@ -8,6 +8,7 @@ using Prism.Mvvm;
 using Prism.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace CallingScore.Prism.ViewModels
@@ -17,17 +18,25 @@ namespace CallingScore.Prism.ViewModels
         private readonly INavigationService _navigationService;
         private readonly IApiService _apiService;
         private ToShowChart _chart;
-        private List<ContactStatistics> _contact;
-        private List<EffectivityStatistics> _effectivity;
+        private ObservableCollection<StatisticsType> _statisticsTypes;
+        private StatisticsType _statisticType;
+        private DelegateCommand _showStatisticsCommand;
+        private bool _isVisible;
+        private bool _isVisibleContact;
+        private bool _isVisibleEffectivity;
+
         public ShowStatisticsPageViewModel(INavigationService navigationService,
             IApiService apiService) : base(navigationService)
         {
             _navigationService = navigationService;
             _apiService = apiService;
             Title = "Show Statistics";
+            IsVisible = false;
             Chart = new ToShowChart();
-            LoadChart();
+            StatisticsTypes = new ObservableCollection<StatisticsType>(CombosHelper.GetStatisticsTypes());
         }
+
+        public DelegateCommand ShowStatisticsCommand => _showStatisticsCommand ?? (_showStatisticsCommand = new DelegateCommand(ShowStatisticsAsync));
 
         public ToShowChart Chart
         {
@@ -35,16 +44,34 @@ namespace CallingScore.Prism.ViewModels
             set => SetProperty(ref _chart, value);
         }
 
-        public List<ContactStatistics> Contact
+        public bool IsVisible
         {
-            get => _contact;
-            set => SetProperty(ref _contact, value);
+            get => _isVisible;
+            set => SetProperty(ref _isVisible, value);
         }
 
-        public List<EffectivityStatistics> Effectivity
+        public bool IsVisibleContact
         {
-            get => _effectivity;
-            set => SetProperty(ref _effectivity, value);
+            get => _isVisibleContact;
+            set => SetProperty(ref _isVisibleContact, value);
+        }
+
+        public bool IsVisibleEffectivity
+        {
+            get => _isVisibleEffectivity;
+            set => SetProperty(ref _isVisibleEffectivity, value);
+        }
+
+        public ObservableCollection<StatisticsType> StatisticsTypes
+        {
+            get => _statisticsTypes;
+            set => SetProperty(ref _statisticsTypes, value);
+        }
+
+        public StatisticsType StatisticType
+        {
+            get => _statisticType;
+            set => SetProperty(ref _statisticType, value);
         }
 
         private async void LoadChart()
@@ -70,8 +97,23 @@ namespace CallingScore.Prism.ViewModels
                 return;
             }
             Chart = (ToShowChart)response.Result;
-            Contact = Chart.ContactStatistics;
-            Effectivity = Chart.EffectivityStatistics;
+            IsVisible = true;
+        }
+
+        private async void ShowStatisticsAsync()
+        {
+            LoadChart();
+            if (StatisticType.Name == "Contact")
+            { 
+                IsVisibleContact = true;
+                IsVisibleEffectivity = false;
+            }
+            else
+            {
+                IsVisibleContact = false;
+                IsVisibleEffectivity = true;
+            }
+            
         }
     }
 }

@@ -20,6 +20,7 @@ namespace CallingScore.Prism.ViewModels
         {
             _navigationService = navigationService;
             _apiService = apiService;
+
         }
 
         public DelegateCommand SelectMenuCommand => _selectMenuCommand ?? (_selectMenuCommand = new DelegateCommand(SelectMenuAsync));

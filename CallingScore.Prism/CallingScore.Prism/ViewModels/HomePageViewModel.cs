@@ -38,7 +38,9 @@ namespace CallingScore.Prism.ViewModels
 
         public async void ShowStatisticsAsync()
         {
+            IsRunning = true;
             await _navigationService.NavigateAsync("/CallingScoreMasterDetailPage/NavigationPage/ShowStatisticsPage");
+            IsRunning = false;
         }
 
     }

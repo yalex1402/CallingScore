@@ -9,14 +9,24 @@
              BackgroundColor="{StaticResource ColorBackground}">
 
     <AbsoluteLayout>
-        
-        <StackLayout>
-            
+
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Statistic Type"
+                   VerticalOptions="Center"/>
+            <Picker 
+                ItemDisplayBinding="{Binding Name}"
+                ItemsSource="{Binding StatisticsTypes}"
+                SelectedItem="{Binding StatisticType}"
+                Title="Select a statistic type">
+            </Picker>
+            <Button Command="{Binding ShowStatisticsCommand}"
+                    Text="Show Statistics"/>
         </StackLayout>
         
         <chart:SfChart
             AreaBorderColor="Gray" 
-            AreaBorderWidth="1">
+            AreaBorderWidth="1"
+            IsVisible="{Binding IsVisible}">
 
             <chart:SfChart.PrimaryAxis>
                 <chart:CategoryAxis>
@@ -36,9 +46,12 @@
                 <chart:ChartLegend/>
             </chart:SfChart.Legend>
             <chart:SfChart.Series>
-                <chart:ColumnSeries ItemsSource="{Binding Contact}" XBindingPath="Day" YBindingPath="PercentContact" 
-                                    Label="Contact" Color="{StaticResource ColorPrimary}"
-                                    EnableDataPointSelection="True" SelectedDataPointIndex="2" SelectedDataPointColor="{StaticResource ColorDanger}"/>
+                <chart:ColumnSeries ItemsSource="{Binding Chart.ContactStatistics}" XBindingPath="Day" YBindingPath="PercentContact" 
+                                    Label="Contact" Color="{StaticResource ColorPrimary}" IsVisible="{Binding IsVisibleContact}"
+                                    EnableDataPointSelection="True" SelectedDataPointIndex="1" SelectedDataPointColor="{StaticResource ColorDanger}"/>
+                <chart:ColumnSeries ItemsSource="{Binding Chart.EffectivityStatistics}" XBindingPath="Day" YBindingPath="PercentEffectivity" 
+                                    Label="Effectivity" Color="{StaticResource ColorAccent}" IsVisible="{Binding IsVisibleEffectivity}"
+                                    EnableDataPointSelection="True" SelectedDataPointIndex="1" SelectedDataPointColor="{StaticResource ColorBackground}"/>
             </chart:SfChart.Series>
 
         </chart:SfChart>

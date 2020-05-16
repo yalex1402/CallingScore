@@ -26,5 +26,14 @@ namespace CallingScore.Prism.Helpers
             };
         }
 
+        public static List<StatisticsType> GetStatisticsTypes()
+        {
+            return new List<StatisticsType>
+            {
+                new StatisticsType{ Id = 1, Name = "Contact" },
+                new StatisticsType{ Id = 2, Name = "Effectivity" }
+            };
+        }
+
     }
 }
