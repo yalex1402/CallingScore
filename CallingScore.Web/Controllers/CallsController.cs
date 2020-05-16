@@ -74,9 +74,9 @@ namespace CallingScore.Web.Controllers
                 }
                 ViewBag.Message = $"The file {model.File.FileName} has been processed successfully!";
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                ViewBag.Message = "There has been an error when trying to process the file";
+                ViewBag.Message = ex.Message;
             }
             
             return View(model);

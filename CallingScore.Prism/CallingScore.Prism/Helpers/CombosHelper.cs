@@ -1,4 +1,5 @@
-﻿using CallingScore.Common.Models;
+﻿using CallingScore.Common.Enums;
+using CallingScore.Common.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -24,6 +25,6 @@ namespace CallingScore.Prism.Helpers
                 new Campaign { Id = 2, Name = "Linea Salida" }
             };
         }
-    }
 
+    }
 }
