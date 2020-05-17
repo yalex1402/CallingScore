@@ -78,7 +78,21 @@ namespace CallingScore.Web.Helpers
                 LastName = userEntity.LastName,
                 PhoneNumber = userEntity.PhoneNumber,
                 PicturePath = userEntity.PicturePath,
-                UserType = userEntity.UserType
+                UserType = userEntity.UserType,
+                Campaign = ToCampaign(userEntity.Campaign)
+            };
+        }
+
+        public Campaign ToCampaign (CampaignEntity campaign)
+        {
+            if(campaign == null)
+            {
+                return null;
+            }
+            return new Campaign
+            {
+                Id = campaign.Id,
+                Name = campaign.Name
             };
         }
 

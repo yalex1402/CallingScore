@@ -12,8 +12,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace CallingScore.Prism.ViewModels
-{
-    public class ShowStatisticsPageViewModel : ViewModelBase
+{    
+    public class ShowStatisticsByCampaignPageViewModel : ViewModelBase
     {
         private readonly INavigationService _navigationService;
         private readonly IApiService _apiService;
@@ -27,18 +27,17 @@ namespace CallingScore.Prism.ViewModels
         private bool _isVisible;
         private bool _isVisibleContact;
         private bool _isVisibleEffectivity;
-
-        public ShowStatisticsPageViewModel(INavigationService navigationService,
+        public ShowStatisticsByCampaignPageViewModel(INavigationService navigationService,
             IApiService apiService) : base(navigationService)
         {
             _navigationService = navigationService;
             _apiService = apiService;
-            Title = "Show Statistics";
             IsRunning = false;
             IsVisible = false;
             Chart = new ToShowChart();
             StatisticsTypes = new ObservableCollection<StatisticsType>(CombosHelper.GetStatisticsTypes());
             Months = new ObservableCollection<Month>(CombosHelper.GetMonths());
+            Title = "Statistics By Campaign";
         }
 
         public DelegateCommand ShowStatisticsCommand => _showStatisticsCommand ?? (_showStatisticsCommand = new DelegateCommand(ShowStatisticsAsync));
@@ -111,9 +110,10 @@ namespace CallingScore.Prism.ViewModels
             StatisticsRequest request = new StatisticsRequest
             {
                 UserCode = userResponse.UserCode,
-                Month = MonthSelected.Id
+                Month = MonthSelected.Id,
+                CampaignId = userResponse.Campaign.Id
             };
-            Response response = await _apiService.GetStatistics(url, "api", "/Calls/MyStatistics", "bearer", token.Token, request);
+            Response response = await _apiService.GetStatistics(url, "api", "/Calls/StatisticsByCampaign", "bearer", token.Token, request);
             if (!response.IsSuccess)
             {
                 await App.Current.MainPage.DisplayAlert("Error", "There has ocurred an error, try again...", "Accept");
@@ -129,7 +129,7 @@ namespace CallingScore.Prism.ViewModels
             IsRunning = true;
             LoadChart();
             if (StatisticType.Name == "Contact")
-            { 
+            {
                 IsVisibleContact = true;
                 IsVisibleEffectivity = false;
             }
@@ -138,7 +138,7 @@ namespace CallingScore.Prism.ViewModels
                 IsVisibleContact = false;
                 IsVisibleEffectivity = true;
             }
-            
+
         }
     }
 }

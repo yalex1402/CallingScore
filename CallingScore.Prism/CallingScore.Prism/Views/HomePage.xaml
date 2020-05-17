@@ -29,6 +29,9 @@
                 <Button Command="{Binding ShowStatisticsCommand}" 
                         Text="Show Statistics"
                         VerticalOptions="EndAndExpand"/>
+                <Button Command="{Binding ShowStatisticsByCampaignCommand}" 
+                        Text="Show Statistics By Campaign"
+                        VerticalOptions="EndAndExpand"/>
             </StackLayout>
         </StackLayout>
         <busyindicator:SfBusyIndicator AnimationType="ZoomingTarget" 

@@ -237,7 +237,7 @@ namespace CallingScore.Web.Controllers.API
 
             CultureInfo cultureInfo = new CultureInfo(emailRequest.CultureInfo);
 
-            UserEntity userEntity = await _userHelper.GetUserAsync(emailRequest.Email);
+            UserEntity userEntity = await _userHelper.GetUserWithCampaign(emailRequest.Email);
             if (userEntity == null)
             {
                 return NotFound("User doesn't exist");

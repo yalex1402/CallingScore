@@ -2,9 +2,9 @@
 
 namespace CallingScore.Prism.Views
 {
-    public partial class StatisticsByUserPage : ContentPage
+    public partial class ShowStatisticsByCampaignPage : ContentPage
     {
-        public StatisticsByUserPage()
+        public ShowStatisticsByCampaignPage()
         {
             InitializeComponent();
         }

@@ -5,7 +5,7 @@
              xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
              xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="CallingScore.Prism.Views.ShowStatisticsPage"
+             x:Class="CallingScore.Prism.Views.ShowStatisticsByCampaignPage"
              Title="{Binding Title}"
              BackgroundColor="{StaticResource ColorBackground}">
 
@@ -17,13 +17,13 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="3*"/>
                 </Grid.ColumnDefinitions>
-                
+
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                
+
                 <Label  Grid.Row="0"
                         Grid.Column="0"
                         Text="Statistic Type"
@@ -45,11 +45,11 @@
                         SelectedItem="{Binding MonthSelected}"
                         Title="Select a month"/>
             </Grid>
-            
+
             <Button Command="{Binding ShowStatisticsCommand}"
                     Text="Show Statistics"/>
         </StackLayout>
-        
+
         <chart:SfChart
             AreaBorderColor="Gray" 
             AreaBorderWidth="1"

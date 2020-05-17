@@ -14,15 +14,19 @@ namespace CallingScore.Prism.ViewModels
         private bool _isEnabled;
         private bool _isRunning;
         private DelegateCommand _showStatisticsCommand;
+        private DelegateCommand _showStatisticsByCampaignCommand;
 
         public HomePageViewModel(INavigationService navigationService): base(navigationService)
         {
             _navigationService = navigationService;
             Title = "Home";
+            IsRunning = false;
             IsEnabled = true;
         }
 
         public DelegateCommand ShowStatisticsCommand => _showStatisticsCommand ?? (_showStatisticsCommand = new DelegateCommand(ShowStatisticsAsync));
+
+        public DelegateCommand ShowStatisticsByCampaignCommand => _showStatisticsByCampaignCommand ?? (_showStatisticsByCampaignCommand = new DelegateCommand(ShowStatisticsByCampaignAsync));
 
         public bool IsRunning
         {
@@ -40,6 +44,13 @@ namespace CallingScore.Prism.ViewModels
         {
             IsRunning = true;
             await _navigationService.NavigateAsync("/CallingScoreMasterDetailPage/NavigationPage/ShowStatisticsPage");
+            IsRunning = false;
+        }
+
+        public async void ShowStatisticsByCampaignAsync()
+        {
+            IsRunning = true;
+            await _navigationService.NavigateAsync("/CallingScoreMasterDetailPage/NavigationPage/ShowStatisticsByCampaignPage");
             IsRunning = false;
         }
 

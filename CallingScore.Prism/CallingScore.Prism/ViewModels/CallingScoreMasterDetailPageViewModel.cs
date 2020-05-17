@@ -91,7 +91,13 @@ namespace CallingScore.Prism.ViewModels
                 {
                     Icon = "ic_bar_chart",
                     PageName = "ShowStatisticsPage",
-                    Title = "Show Statistics"
+                    Title = "My Statistics"
+                },
+                new Menu
+                {
+                    Icon = "ic_bar_chart",
+                    PageName = "ShowStatisticsByCampaignPage",
+                    Title = "Statistics By Campaign"
                 },
                 new Menu
                 {

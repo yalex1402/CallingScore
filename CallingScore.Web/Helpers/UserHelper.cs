@@ -182,6 +182,13 @@ namespace CallingScore.Web.Helpers
                 .ToListAsync();
             return users;
         }
+
+        public async Task<UserEntity> GetUserWithCampaign(string email)
+        {
+            return await _dataContext.Users
+                .Include(u => u.Campaign)
+                .FirstOrDefaultAsync(u => u.Email == email);
+        }
     }
 
 }

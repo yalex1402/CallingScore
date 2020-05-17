@@ -49,5 +49,7 @@ namespace CallingScore.Web.Helpers
         Task AddUserToCampaignAsync(UserEntity user, string campaignName);
 
         Task<List<UserEntity>> GetUsersByCampaign(int campaignId);
+
+        Task<UserEntity> GetUserWithCampaign(string email);
     }
 }
