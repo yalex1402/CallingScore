@@ -1,6 +1,7 @@
 ﻿using CallingScore.Common.Helpers;
 using CallingScore.Common.Models;
 using CallingScore.Common.Services;
+using Newtonsoft.Json;
 using Prism.Commands;
 using Prism.Navigation;
 using System;
@@ -40,6 +41,13 @@ namespace CallingScore.Prism.ViewModels
                 return;
             }
 
+            UserResponse user = JsonConvert.DeserializeObject<UserResponse>(Settings.User);
+            if((user.UserType == Common.Enums.UserType.CallAdviser &&  PageName == "ShowStatisticsByCampaignPage")
+                || (user.UserType == Common.Enums.UserType.Supervisor && PageName == "ShowStatisticsPage"))
+            {
+                await App.Current.MainPage.DisplayAlert("Error", "You're not authorized to access into that statistic", "Accept");
+                return;
+            }
             await _navigationService.NavigateAsync($"/CallingScoreMasterDetailPage/NavigationPage/{PageName}");
         }
     }
