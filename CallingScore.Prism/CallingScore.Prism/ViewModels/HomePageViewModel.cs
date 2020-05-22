@@ -1,5 +1,6 @@
 ﻿using CallingScore.Common.Helpers;
 using CallingScore.Common.Models;
+using CallingScore.Prism.Helpers;
 using CallingScore.Prism.Views;
 using Newtonsoft.Json;
 using Prism.Commands;
@@ -23,7 +24,7 @@ namespace CallingScore.Prism.ViewModels
         public HomePageViewModel(INavigationService navigationService): base(navigationService)
         {
             _navigationService = navigationService;
-            Title = "Home";
+            Title = Languages.Home;
             IsRunning = false;
             IsEnabled = true;
             _user = JsonConvert.DeserializeObject<UserResponse>(Settings.User);
@@ -51,7 +52,7 @@ namespace CallingScore.Prism.ViewModels
             if (_user.UserType == Common.Enums.UserType.Supervisor)
             {
                 IsRunning = false;
-                await App.Current.MainPage.DisplayAlert("Error", "You're not authorized to access into that statistic", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ErrorStatisticsAccess, Languages.Accept);
                 return;
             }
             await _navigationService.NavigateAsync("/CallingScoreMasterDetailPage/NavigationPage/ShowStatisticsPage");
@@ -64,7 +65,7 @@ namespace CallingScore.Prism.ViewModels
             if(_user.UserType == Common.Enums.UserType.CallAdviser)
             {
                 IsRunning = false;
-                await App.Current.MainPage.DisplayAlert("Error", "You're not authorized to access into that statistic", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ErrorStatisticsAccess, Languages.Accept);
                 return;
             }
             await _navigationService.NavigateAsync("/CallingScoreMasterDetailPage/NavigationPage/ShowStatisticsByCampaignPage");

@@ -252,4 +252,100 @@
   <data name="CampaignPlaceHolder" xml:space="preserve">
     <value>Seleccione una campaña</value>
   </data>
+  <data name="ErrorFBImage" xml:space="preserve">
+    <value>Los usuarios de Facebook tienen que cambiar la imagen en Facebook</value>
+  </data>
+  <data name="ErrorFBPassword" xml:space="preserve">
+    <value>Los usuarios de Facebook tienen que cambiar la contraseña en Facebook</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Cambiar contraseña</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Contraseña actual</value>
+  </data>
+  <data name="CurrentPasswordPlaceHolder" xml:space="preserve">
+    <value>Escribe tu contraseña actual</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Contraseña nueva</value>
+  </data>
+  <data name="NewPasswordPlaceHolder" xml:space="preserve">
+    <value>Escribe tu contraseña</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Inicio</value>
+  </data>
+  <data name="MyStatistics" xml:space="preserve">
+    <value>Mis estadísticas</value>
+  </data>
+  <data name="StatisticsByCampaign" xml:space="preserve">
+    <value>Estadísticas por campaña</value>
+  </data>
+  <data name="ErrorStatisticsAccess" xml:space="preserve">
+    <value>No tiene autorización para acceder a esa estadística</value>
+  </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>¡Bienvenido a Calling Score, para mostrar las estadísticas, haga clic en el botón ...!</value>
+  </data>
+  <data name="TryAgain" xml:space="preserve">
+    <value>Ha habido un error, inténtelo de nuevo...</value>
+  </data>
+  <data name="Contact" xml:space="preserve">
+    <value>Contacto</value>
+  </data>
+  <data name="Effectivity" xml:space="preserve">
+    <value>Efectividad</value>
+  </data>
+  <data name="January" xml:space="preserve">
+    <value>Enero</value>
+  </data>
+  <data name="February" xml:space="preserve">
+    <value>Febrero</value>
+  </data>
+  <data name="March" xml:space="preserve">
+    <value>Marzo</value>
+  </data>
+  <data name="April" xml:space="preserve">
+    <value>Abril</value>
+  </data>
+  <data name="May" xml:space="preserve">
+    <value>Mayo</value>
+  </data>
+  <data name="June" xml:space="preserve">
+    <value>Junio</value>
+  </data>
+  <data name="July" xml:space="preserve">
+    <value>Julio</value>
+  </data>
+  <data name="August" xml:space="preserve">
+    <value>Agosto</value>
+  </data>
+  <data name="September" xml:space="preserve">
+    <value>Septiembre</value>
+  </data>
+  <data name="Octuber" xml:space="preserve">
+    <value>Octubre</value>
+  </data>
+  <data name="November" xml:space="preserve">
+    <value>Noviembre</value>
+  </data>
+  <data name="Dicember" xml:space="preserve">
+    <value>Diciembre</value>
+  </data>
+  <data name="Month" xml:space="preserve">
+    <value>Mes</value>
+  </data>
+  <data name="StatisticType" xml:space="preserve">
+    <value>Tipo de estadística</value>
+  </data>
+  <data name="StatisticTypePlaceHolder" xml:space="preserve">
+    <value>¡Seleccione un tipo de estadística!</value>
+  </data>
+  <data name="ShowStatistic" xml:space="preserve">
+    <value>Estadisticas</value>
+  </data>
+  <data name="MonthPlaceHolder" xml:space="preserve">
+    <value>Seleccionar un mes:</value>
+  </data>
 </root>

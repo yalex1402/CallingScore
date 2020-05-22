@@ -37,7 +37,7 @@ namespace CallingScore.Prism.ViewModels
             Chart = new ToShowChart();
             StatisticsTypes = new ObservableCollection<StatisticsType>(CombosHelper.GetStatisticsTypes());
             Months = new ObservableCollection<Month>(CombosHelper.GetMonths());
-            Title = "Statistics By Campaign";
+            Title = Languages.StatisticsByCampaign;
         }
 
         public DelegateCommand ShowStatisticsCommand => _showStatisticsCommand ?? (_showStatisticsCommand = new DelegateCommand(ShowStatisticsAsync));
@@ -102,7 +102,7 @@ namespace CallingScore.Prism.ViewModels
             bool connection = await _apiService.CheckConnectionAsync(url);
             if (!connection)
             {
-                await App.Current.MainPage.DisplayAlert("Error", "Check the internet connection", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.InternetConnection, Languages.Accept);
                 return;
             }
             TokenResponse token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
@@ -116,7 +116,7 @@ namespace CallingScore.Prism.ViewModels
             Response response = await _apiService.GetStatistics(url, "api", "/Calls/StatisticsByCampaign", "bearer", token.Token, request);
             if (!response.IsSuccess)
             {
-                await App.Current.MainPage.DisplayAlert("Error", "There has ocurred an error, try again...", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.TryAgain, Languages.Accept);
                 return;
             }
             Chart = (ToShowChart)response.Result;
@@ -128,7 +128,7 @@ namespace CallingScore.Prism.ViewModels
         {
             IsRunning = true;
             LoadChart();
-            if (StatisticType.Name == "Contact")
+            if (StatisticType.Name == Languages.Contact)
             {
                 IsVisibleContact = true;
                 IsVisibleEffectivity = false;

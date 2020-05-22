@@ -2,6 +2,7 @@
 using CallingScore.Common.Helpers;
 using CallingScore.Common.Models;
 using CallingScore.Common.Services;
+using CallingScore.Prism.Helpers;
 using CallingScore.Prism.Views;
 using Newtonsoft.Json;
 using Plugin.Media;
@@ -36,7 +37,7 @@ namespace CallingScore.Prism.ViewModels
             _navigationService = navigationService;
             _filesHelper = filesHelper;
             _apiService = apiService;
-            Title = "Modify User";
+            Title = Languages.ModifyUser;
             IsEnabled = true;           
             User = JsonConvert.DeserializeObject<UserResponse>(Settings.User);
             IsAppUser = User.LoginType == LoginType.App;
@@ -105,7 +106,7 @@ namespace CallingScore.Prism.ViewModels
                 Phone = User.PhoneNumber,
                 PictureArray = imageArray,
                 UserTypeId = User.UserType == UserType.Supervisor ? 1 : 2,
-                CultureInfo = "es"
+                CultureInfo = Languages.Culture
             };
 
             TokenResponse token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
@@ -118,13 +119,13 @@ namespace CallingScore.Prism.ViewModels
 
             if (!response.IsSuccess)
             {
-                await App.Current.MainPage.DisplayAlert("Error", response.Message, "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, response.Message, Languages.Accept);
                 return;
             }
 
             Settings.User = JsonConvert.SerializeObject(User);
             CallingScoreMasterDetailPageViewModel.GetInstance().ReloadUser();
-            await App.Current.MainPage.DisplayAlert("Ok", "User has been updated successfully", "Accept");
+            await App.Current.MainPage.DisplayAlert(Languages.Ok, Languages.UserUpdated, Languages.Accept);
         }
 
         private async Task<bool> ValidateDataAsync()
@@ -132,7 +133,7 @@ namespace CallingScore.Prism.ViewModels
             if (string.IsNullOrEmpty(User.Document) || string.IsNullOrEmpty(User.FirstName)
                 || string.IsNullOrEmpty(User.LastName) || string.IsNullOrEmpty(User.PhoneNumber))
             {
-                await App.Current.MainPage.DisplayAlert("Error", "There's a field empty", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ErrorEmptyField, Languages.Accept);
                 return false;
             }
 
@@ -143,26 +144,26 @@ namespace CallingScore.Prism.ViewModels
         {
             if (!IsAppUser)
             {
-                await App.Current.MainPage.DisplayAlert("Error", "Facebook users have to change the image in FB", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ErrorFBImage, Languages.Accept);
                 return;
             }
 
             await CrossMedia.Current.Initialize();
 
             string source = await Application.Current.MainPage.DisplayActionSheet(
-                "PictureSource",
-                "Cancel",
+                Languages.PictureSource,
+                Languages.Cancel,
                 null,
-                "FromGallery",
-                "FromCamera");
+                Languages.FromGallery,
+                Languages.FromCamera);
 
-            if (source == "Cancel")
+            if (source == Languages.Cancel)
             {
                 _file = null;
                 return;
             }
 
-            if (source == "FromCamera")
+            if (source == Languages.FromCamera)
             {
                 _file = await CrossMedia.Current.TakePhotoAsync(
                     new StoreCameraMediaOptions
@@ -192,7 +193,7 @@ namespace CallingScore.Prism.ViewModels
         {
             if (!IsAppUser)
             {
-                await App.Current.MainPage.DisplayAlert("Error", "Facebook users have to change the password in FB", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ErrorFBPassword, Languages.Accept);
                 return;
             }
 

@@ -4,6 +4,7 @@
              xmlns:prism="http://prismlibrary.com"
              xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
              xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+             xmlns:i18n="clr-namespace:CallingScore.Prism.Helpers"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="CallingScore.Prism.Views.ShowStatisticsPage"
              Title="{Binding Title}"
@@ -26,28 +27,28 @@
                 
                 <Label  Grid.Row="0"
                         Grid.Column="0"
-                        Text="Statistic Type"
+                        Text="{i18n:Translate StatisticType}"
                         VerticalOptions="Center"/>
                 <Picker Grid.Row="0"
                         Grid.Column="1"
                         ItemDisplayBinding="{Binding Name}"
                         ItemsSource="{Binding StatisticsTypes}"
                         SelectedItem="{Binding StatisticType}"
-                        Title="Select a statistic type"/>
+                        Title="{i18n:Translate StatisticTypePlaceHolder}"/>
                 <Label  Grid.Row="1"
                         Grid.Column="0"
-                        Text="Month"
+                        Text="{i18n:Translate Month}"
                         VerticalOptions="Center"/>
                 <Picker Grid.Row="1"
                         Grid.Column="1"
                         ItemDisplayBinding="{Binding Name}"
                         ItemsSource="{Binding Months}"
                         SelectedItem="{Binding MonthSelected}"
-                        Title="Select a month"/>
+                        Title="{i18n:Translate MonthPlaceHolder}"/>
             </Grid>
             
             <Button Command="{Binding ShowStatisticsCommand}"
-                    Text="Show Statistics"/>
+                    Text="{i18n:Translate ShowStatistic}"/>
         </StackLayout>
         
         <chart:SfChart
@@ -74,10 +75,10 @@
             </chart:SfChart.Legend>
             <chart:SfChart.Series>
                 <chart:ColumnSeries ItemsSource="{Binding Chart.ContactStatistics}" XBindingPath="Day" YBindingPath="PercentContact" 
-                                    Label="Contact" Color="{StaticResource ColorPrimary}" IsVisible="{Binding IsVisibleContact}"
+                                    Label="{i18n:Translate Contact}" Color="{StaticResource ColorPrimary}" IsVisible="{Binding IsVisibleContact}"
                                     EnableDataPointSelection="True" SelectedDataPointIndex="1" SelectedDataPointColor="{StaticResource ColorDanger}"/>
                 <chart:ColumnSeries ItemsSource="{Binding Chart.EffectivityStatistics}" XBindingPath="Day" YBindingPath="PercentEffectivity" 
-                                    Label="Effectivity" Color="{StaticResource ColorAccent}" IsVisible="{Binding IsVisibleEffectivity}"
+                                    Label="{i18n:Translate Effectivity}" Color="{StaticResource ColorAccent}" IsVisible="{Binding IsVisibleEffectivity}"
                                     EnableDataPointSelection="True" SelectedDataPointIndex="1" SelectedDataPointColor="{StaticResource ColorBackground}"/>
             </chart:SfChart.Series>
 
@@ -89,7 +90,7 @@
                 	                   HorizontalOptions="Center"
                 	                   TextColor="{StaticResource ColorFontInverse}"
                 	                   IsVisible="{Binding IsRunning}"
-                	                   Title="Loading..."
+                	                   Title="{i18n:Translate Loading}"
                 	                   VerticalOptions="Center"
                 	                   ViewBoxWidth="80"
                 	                   ViewBoxHeight="80" />

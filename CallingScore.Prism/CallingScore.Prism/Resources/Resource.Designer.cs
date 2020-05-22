@@ -70,6 +70,24 @@ namespace CallingScore.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to April.
+        /// </summary>
+        internal static string April {
+            get {
+                return ResourceManager.GetString("April", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to August.
+        /// </summary>
+        internal static string August {
+            get {
+                return ResourceManager.GetString("August", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Campaign.
         /// </summary>
         internal static string Campaign {
@@ -106,11 +124,56 @@ namespace CallingScore.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Change Password.
+        /// </summary>
+        internal static string ChangePassword {
+            get {
+                return ResourceManager.GetString("ChangePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirm Password.
         /// </summary>
         internal static string ConfirmPassword {
             get {
                 return ResourceManager.GetString("ConfirmPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contact.
+        /// </summary>
+        internal static string Contact {
+            get {
+                return ResourceManager.GetString("Contact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current Password.
+        /// </summary>
+        internal static string CurrentPassword {
+            get {
+                return ResourceManager.GetString("CurrentPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Write your current password.
+        /// </summary>
+        internal static string CurrentPasswordPlaceHolder {
+            get {
+                return ResourceManager.GetString("CurrentPasswordPlaceHolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dicember.
+        /// </summary>
+        internal static string Dicember {
+            get {
+                return ResourceManager.GetString("Dicember", resourceCulture);
             }
         }
         
@@ -129,6 +192,15 @@ namespace CallingScore.Prism.Resources {
         internal static string DocumentPlaceHolder {
             get {
                 return ResourceManager.GetString("DocumentPlaceHolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Effectivity.
+        /// </summary>
+        internal static string Effectivity {
+            get {
+                return ResourceManager.GetString("Effectivity", resourceCulture);
             }
         }
         
@@ -178,6 +250,24 @@ namespace CallingScore.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Facebook users have to change the image in Facebook.
+        /// </summary>
+        internal static string ErrorFBImage {
+            get {
+                return ResourceManager.GetString("ErrorFBImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Facebook users have to change the password in Facebook.
+        /// </summary>
+        internal static string ErrorFBPassword {
+            get {
+                return ResourceManager.GetString("ErrorFBPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email or Password aren&apos;t valid.
         /// </summary>
         internal static string ErrorLogin {
@@ -223,11 +313,29 @@ namespace CallingScore.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You&apos;re not authorized to access into that statistic.
+        /// </summary>
+        internal static string ErrorStatisticsAccess {
+            get {
+                return ResourceManager.GetString("ErrorStatisticsAccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Facebook Authorization.
         /// </summary>
         internal static string FBAuthorization {
             get {
                 return ResourceManager.GetString("FBAuthorization", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to February.
+        /// </summary>
+        internal static string February {
+            get {
+                return ResourceManager.GetString("February", resourceCulture);
             }
         }
         
@@ -277,11 +385,47 @@ namespace CallingScore.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Index.
+        /// </summary>
+        internal static string Home {
+            get {
+                return ResourceManager.GetString("Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Check the internet connection.
         /// </summary>
         internal static string InternetConnection {
             get {
                 return ResourceManager.GetString("InternetConnection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to January.
+        /// </summary>
+        internal static string January {
+            get {
+                return ResourceManager.GetString("January", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to July.
+        /// </summary>
+        internal static string July {
+            get {
+                return ResourceManager.GetString("July", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to June.
+        /// </summary>
+        internal static string June {
+            get {
+                return ResourceManager.GetString("June", resourceCulture);
             }
         }
         
@@ -340,11 +484,92 @@ namespace CallingScore.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to March.
+        /// </summary>
+        internal static string March {
+            get {
+                return ResourceManager.GetString("March", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to May.
+        /// </summary>
+        internal static string May {
+            get {
+                return ResourceManager.GetString("May", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Modify User.
         /// </summary>
         internal static string ModifyUser {
             get {
                 return ResourceManager.GetString("ModifyUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Month.
+        /// </summary>
+        internal static string Month {
+            get {
+                return ResourceManager.GetString("Month", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select a month.
+        /// </summary>
+        internal static string MonthPlaceHolder {
+            get {
+                return ResourceManager.GetString("MonthPlaceHolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to My Statistics.
+        /// </summary>
+        internal static string MyStatistics {
+            get {
+                return ResourceManager.GetString("MyStatistics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Password.
+        /// </summary>
+        internal static string NewPassword {
+            get {
+                return ResourceManager.GetString("NewPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Write your new password.
+        /// </summary>
+        internal static string NewPasswordPlaceHolder {
+            get {
+                return ResourceManager.GetString("NewPasswordPlaceHolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to November.
+        /// </summary>
+        internal static string November {
+            get {
+                return ResourceManager.GetString("November", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Octuber.
+        /// </summary>
+        internal static string Octuber {
+            get {
+                return ResourceManager.GetString("Octuber", resourceCulture);
             }
         }
         
@@ -448,6 +673,60 @@ namespace CallingScore.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to September.
+        /// </summary>
+        internal static string September {
+            get {
+                return ResourceManager.GetString("September", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show statistic.
+        /// </summary>
+        internal static string ShowStatistic {
+            get {
+                return ResourceManager.GetString("ShowStatistic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Statistics by campaign.
+        /// </summary>
+        internal static string StatisticsByCampaign {
+            get {
+                return ResourceManager.GetString("StatisticsByCampaign", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Statistic Type.
+        /// </summary>
+        internal static string StatisticType {
+            get {
+                return ResourceManager.GetString("StatisticType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select a statistic type.
+        /// </summary>
+        internal static string StatisticTypePlaceHolder {
+            get {
+                return ResourceManager.GetString("StatisticTypePlaceHolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There has ocurred an error, try again....
+        /// </summary>
+        internal static string TryAgain {
+            get {
+                return ResourceManager.GetString("TryAgain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unauthorized.
         /// </summary>
         internal static string Unauthorized {
@@ -462,6 +741,15 @@ namespace CallingScore.Prism.Resources {
         internal static string UserUpdated {
             get {
                 return ResourceManager.GetString("UserUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Welcome to Calling Score, To show the statistics click the button....
+        /// </summary>
+        internal static string Welcome {
+            get {
+                return ResourceManager.GetString("Welcome", resourceCulture);
             }
         }
     }

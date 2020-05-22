@@ -1,6 +1,7 @@
 ﻿using CallingScore.Common.Helpers;
 using CallingScore.Common.Models;
 using CallingScore.Common.Services;
+using CallingScore.Prism.Helpers;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
@@ -29,7 +30,7 @@ namespace CallingScore.Prism.ViewModels
             _navigationService = navigationService;
             _apiService = apiService;
             _regexHelper = regexHelper;
-            Title = "Recover Password";
+            Title = Languages.RecoverPassword;
             IsEnabled = true;
         }
 
@@ -66,14 +67,14 @@ namespace CallingScore.Prism.ViewModels
             {
                 IsRunning = false;
                 IsEnabled = true;
-                await App.Current.MainPage.DisplayAlert("Error", "Check the internet connection", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.InternetConnection, Languages.Accept);
                 return;
             }
 
             EmailRequest request = new EmailRequest
             {
                 Email = Email,
-                CultureInfo = "es"
+                CultureInfo = Languages.Culture
             };
 
             Response response = await _apiService.RecoverPasswordAsync(url, "/api", "/Account/RecoverPassword", request);
@@ -83,11 +84,11 @@ namespace CallingScore.Prism.ViewModels
 
             if (!response.IsSuccess)
             {
-                await App.Current.MainPage.DisplayAlert("Error", response.Message, "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, response.Message, Languages.Accept);
                 return;
             }
 
-            await App.Current.MainPage.DisplayAlert("Ok", response.Message, "Accept");
+            await App.Current.MainPage.DisplayAlert(Languages.Ok, response.Message, Languages.Accept);
             await _navigationService.GoBackAsync();
         }
 
@@ -95,7 +96,7 @@ namespace CallingScore.Prism.ViewModels
         {
             if (string.IsNullOrEmpty(Email) || !_regexHelper.IsValidEmail(Email))
             {
-                await App.Current.MainPage.DisplayAlert("Error", "You must write a valid email address", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ErrorEmptyField, Languages.Accept);
                 return false;
             }
 

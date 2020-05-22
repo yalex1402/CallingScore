@@ -1,6 +1,7 @@
 ﻿using CallingScore.Common.Helpers;
 using CallingScore.Common.Models;
 using CallingScore.Common.Services;
+using CallingScore.Prism.Helpers;
 using CallingScore.Prism.Views;
 using Newtonsoft.Json;
 using Prism.Commands;
@@ -85,31 +86,31 @@ namespace CallingScore.Prism.ViewModels
                 {
                     Icon = "ic_home",
                     PageName = "HomePage",
-                    Title = "Home"
+                    Title = Languages.Home
                 },
                 new Menu
                 {
                     Icon = "ic_bar_chart",
                     PageName = "ShowStatisticsPage",
-                    Title = "My Statistics"
+                    Title = Languages.MyStatistics
                 },
                 new Menu
                 {
                     Icon = "ic_bar_chart",
                     PageName = "ShowStatisticsByCampaignPage",
-                    Title = "Statistics By Campaign"
+                    Title = Languages.StatisticsByCampaign
                 },
                 new Menu
                 {
                     Icon = "ic_account_circle",
                     PageName = "ModifyUserPage",
-                    Title = "Modify User"
+                    Title = Languages.ModifyUser
                 },
                 new Menu
                 {
                     Icon = "ic_exit_to_app",
                     PageName = "LoginPage",
-                    Title = Settings.IsLogin? "Logout" : "Login"
+                    Title = Settings.IsLogin? Languages.Logout : Languages.Login
                 }
             };
 

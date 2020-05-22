@@ -33,7 +33,7 @@ namespace CallingScore.Prism.ViewModels
         {
             _navigationService = navigationService;
             _apiService = apiService;
-            Title = "Show Statistics";
+            Title = Languages.MyStatistics;
             IsRunning = false;
             IsVisible = false;
             Chart = new ToShowChart();
@@ -103,7 +103,7 @@ namespace CallingScore.Prism.ViewModels
             bool connection = await _apiService.CheckConnectionAsync(url);
             if (!connection)
             {
-                await App.Current.MainPage.DisplayAlert("Error", "Check the internet connection", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.InternetConnection, Languages.Accept);
                 return;
             }
             TokenResponse token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
@@ -116,7 +116,7 @@ namespace CallingScore.Prism.ViewModels
             Response response = await _apiService.GetStatistics(url, "api", "/Calls/MyStatistics", "bearer", token.Token, request);
             if (!response.IsSuccess)
             {
-                await App.Current.MainPage.DisplayAlert("Error", "There has ocurred an error, try again...", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.TryAgain, Languages.Accept);
                 return;
             }
             Chart = (ToShowChart)response.Result;
@@ -128,7 +128,7 @@ namespace CallingScore.Prism.ViewModels
         {
             IsRunning = true;
             LoadChart();
-            if (StatisticType.Name == "Contact")
+            if (StatisticType.Name == Languages.Contact)
             { 
                 IsVisibleContact = true;
                 IsVisibleEffectivity = false;

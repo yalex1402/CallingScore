@@ -30,8 +30,8 @@ namespace CallingScore.Prism.Helpers
         {
             return new List<StatisticsType>
             {
-                new StatisticsType{ Id = 1, Name = "Contact" },
-                new StatisticsType{ Id = 2, Name = "Effectivity" }
+                new StatisticsType{ Id = 1, Name = Languages.Contact},
+                new StatisticsType{ Id = 2, Name = Languages.Effectivity }
             };
         }
 
@@ -39,18 +39,18 @@ namespace CallingScore.Prism.Helpers
         {
             return new List<Month>
             {
-                new Month { Id = 1, Name = "January" },
-                new Month { Id = 2, Name = "February" },
-                new Month { Id = 3, Name = "March" },
-                new Month { Id = 4, Name = "April" },
-                new Month { Id = 5, Name = "May" },
-                new Month { Id = 6, Name = "June" },
-                new Month { Id = 7, Name = "July" },
-                new Month { Id = 8, Name = "August" },
-                new Month { Id = 9, Name = "September" },
-                new Month { Id = 10, Name = "Octuber" },
-                new Month { Id = 11, Name = "November" },
-                new Month { Id = 12, Name = "December" }
+                new Month { Id = 1, Name = Languages.January },
+                new Month { Id = 2, Name = Languages.February },
+                new Month { Id = 3, Name = Languages.March },
+                new Month { Id = 4, Name = Languages.April },
+                new Month { Id = 5, Name = Languages.May },
+                new Month { Id = 6, Name = Languages.June },
+                new Month { Id = 7, Name = Languages.July },
+                new Month { Id = 8, Name = Languages.August },
+                new Month { Id = 9, Name = Languages.September },
+                new Month { Id = 10, Name = Languages.Octuber },
+                new Month { Id = 11, Name = Languages.November },
+                new Month { Id = 12, Name = Languages.Dicember }
             };
         }
 

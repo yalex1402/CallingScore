@@ -109,5 +109,69 @@ namespace CallingScore.Prism.Helpers
 
         public static string Save => Resource.Save;
 
+        public static string ChangePassword => Resource.ChangePassword;
+
+        public static string CurrentPassword => Resource.CurrentPassword;
+
+        public static string CurrentPasswordPlaceHolder => Resource.CurrentPasswordPlaceHolder;
+
+        public static string NewPassword => Resource.NewPassword;
+
+        public static string NewPasswordPlaceHolder => Resource.NewPasswordPlaceHolder;
+
+        public static string ErrorFBImage => Resource.ErrorFBImage;
+
+        public static string ErrorFBPassword => Resource.ErrorFBPassword;
+
+        public static string Home => Resource.Home;
+
+        public static string MyStatistics => Resource.MyStatistics;
+
+        public static string StatisticsByCampaign => Resource.StatisticsByCampaign;
+
+        public static string ErrorStatisticsAccess => Resource.ErrorStatisticsAccess;
+
+        public static string Welcome => Resource.Welcome;
+
+        public static string TryAgain => Resource.TryAgain;
+
+        public static string Contact => Resource.Contact;
+
+        public static string Effectivity => Resource.Effectivity;
+
+        public static string January => Resource.January;
+
+        public static string February => Resource.February;
+
+        public static string March => Resource.March;
+
+        public static string April => Resource.April;
+
+        public static string May => Resource.May;
+
+        public static string June => Resource.June;
+
+        public static string July => Resource.July;
+
+        public static string August => Resource.August;
+
+        public static string September => Resource.September;
+
+        public static string Octuber => Resource.Octuber;
+
+        public static string November => Resource.November;
+
+        public static string Dicember => Resource.Dicember;
+
+        public static string Month => Resource.Month;
+
+        public static string MonthPlaceHolder => Resource.MonthPlaceHolder;
+
+        public static string StatisticType => Resource.StatisticType;
+
+        public static string StatisticTypePlaceHolder => Resource.StatisticTypePlaceHolder;
+
+        public static string ShowStatistic => Resource.ShowStatistic;
+
     }
 }

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+             xmlns:i18n="clr-namespace:CallingScore.Prism.Helpers"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="CallingScore.Prism.Views.HomePage"
              Title="{Binding Title}"
@@ -23,14 +24,14 @@
                     />
             <Label HorizontalTextAlignment="Center"
                        VerticalTextAlignment="Center"
-                       Text="Welcome to Calling Score, To show the statistics click the button..."
+                       Text="{i18n:Translate Welcome}"
                     />
             <StackLayout>
                 <Button Command="{Binding ShowStatisticsCommand}" 
-                        Text="Show Statistics"
+                        Text="{i18n:Translate MyStatistics}"
                         VerticalOptions="EndAndExpand"/>
                 <Button Command="{Binding ShowStatisticsByCampaignCommand}" 
-                        Text="Show Statistics By Campaign"
+                        Text="{i18n:Translate StatisticsByCampaign}"
                         VerticalOptions="EndAndExpand"/>
             </StackLayout>
         </StackLayout>
@@ -41,7 +42,7 @@
                 	                   HorizontalOptions="Center"
                 	                   TextColor="{StaticResource ColorFontInverse}"
                 	                   IsVisible="{Binding IsRunning}"
-                	                   Title="Loading..."
+                	                   Title="{i18n:Translate Loading}"
                 	                   VerticalOptions="Center"
                 	                   ViewBoxWidth="80"
                 	                   ViewBoxHeight="80" />
