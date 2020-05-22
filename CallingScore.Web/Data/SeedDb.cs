@@ -71,7 +71,8 @@ namespace CallingScore.Web.Data
                     UserName = email,
                     PhoneNumber = phone,
                     Document = document,
-                    UserType = userType
+                    UserType = userType,
+                    LoginType = LoginType.App
                 };
 
                 await _userHelper.AddUserAsync(user, "123456");

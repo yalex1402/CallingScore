@@ -20,6 +20,7 @@ namespace CallingScore.Prism.ViewModels
         private readonly IApiService _apiService;
         private bool _isRunning;
         private bool _isEnabled;
+        private bool _isAppUser;
         private ImageSource _image;
         private UserResponse _user;
         private MediaFile _file;
@@ -36,8 +37,9 @@ namespace CallingScore.Prism.ViewModels
             _filesHelper = filesHelper;
             _apiService = apiService;
             Title = "Modify User";
-            IsEnabled = true;
+            IsEnabled = true;           
             User = JsonConvert.DeserializeObject<UserResponse>(Settings.User);
+            IsAppUser = User.LoginType == LoginType.App;
             Image = User.PictureFullPath;
         }
 
@@ -69,6 +71,12 @@ namespace CallingScore.Prism.ViewModels
         {
             get => _isEnabled;
             set => SetProperty(ref _isEnabled, value);
+        }
+
+        public bool IsAppUser
+        {
+            get => _isAppUser;
+            set => SetProperty(ref _isAppUser, value);
         }
 
         private async void SaveAsync()
@@ -133,6 +141,12 @@ namespace CallingScore.Prism.ViewModels
 
         private async void ChangeImageAsync()
         {
+            if (!IsAppUser)
+            {
+                await App.Current.MainPage.DisplayAlert("Error", "Facebook users have to change the image in FB", "Accept");
+                return;
+            }
+
             await CrossMedia.Current.Initialize();
 
             string source = await Application.Current.MainPage.DisplayActionSheet(
@@ -176,6 +190,12 @@ namespace CallingScore.Prism.ViewModels
 
         private async void ChangePasswordAsync()
         {
+            if (!IsAppUser)
+            {
+                await App.Current.MainPage.DisplayAlert("Error", "Facebook users have to change the password in FB", "Accept");
+                return;
+            }
+
             await _navigationService.NavigateAsync(nameof(ChangePasswordPage));
         }
     }

@@ -1,4 +1,5 @@
-﻿using CallingScore.Web.Data.Entities;
+﻿using CallingScore.Common.Models;
+using CallingScore.Web.Data.Entities;
 using CallingScore.Web.Models;
 using Microsoft.AspNetCore.Identity;
 using System;
@@ -51,5 +52,7 @@ namespace CallingScore.Web.Helpers
         Task<List<UserEntity>> GetUsersByCampaign(int campaignId);
 
         Task<UserEntity> GetUserWithCampaign(string email);
+
+        Task<UserEntity> AddUserAsync(FacebookProfile model);
     }
 }

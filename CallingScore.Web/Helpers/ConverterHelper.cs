@@ -79,7 +79,8 @@ namespace CallingScore.Web.Helpers
                 PhoneNumber = userEntity.PhoneNumber,
                 PicturePath = userEntity.PicturePath,
                 UserType = userEntity.UserType,
-                Campaign = ToCampaign(userEntity.Campaign)
+                Campaign = ToCampaign(userEntity.Campaign),
+                LoginType = userEntity.LoginType
             };
         }
 

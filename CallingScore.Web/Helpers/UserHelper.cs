@@ -1,4 +1,5 @@
 ﻿using CallingScore.Common.Enums;
+using CallingScore.Common.Models;
 using CallingScore.Web.Data;
 using CallingScore.Web.Data.Entities;
 using CallingScore.Web.Models;
@@ -16,18 +17,21 @@ namespace CallingScore.Web.Helpers
         private readonly UserManager<UserEntity> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly DataContext _dataContext;
+        private readonly ICampaignHelper _campaignHelper;
         private readonly SignInManager<UserEntity> _signInManager;
 
         public UserHelper(
             UserManager<UserEntity> userManager,
             RoleManager<IdentityRole> roleManager,
             SignInManager<UserEntity> signInManager,
-            DataContext dataContext)
+            DataContext dataContext,
+            ICampaignHelper campaignHelper)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _signInManager = signInManager;
             _dataContext = dataContext;
+            _campaignHelper = campaignHelper;
         }
 
         public async Task<IdentityResult> AddUserAsync(UserEntity user, string password)
@@ -189,6 +193,35 @@ namespace CallingScore.Web.Helpers
                 .Include(u => u.Campaign)
                 .FirstOrDefaultAsync(u => u.Email == email);
         }
+
+        public async Task<UserEntity> AddUserAsync(FacebookProfile model)
+        {
+            UserEntity userEntity = new UserEntity
+            {
+                Document = "...",
+                Email = model.Email,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                PicturePath = model.Picture?.Data?.Url,
+                PhoneNumber = "...",
+                UserName = model.Email,
+                UserType = UserType.CallAdviser,
+                LoginType = LoginType.Facebook,
+                UserCode = GetUserCode(model.FirstName, model.LastName),
+                Campaign = await _campaignHelper.GetCampaign(1)
+            };
+
+            IdentityResult result = await _userManager.CreateAsync(userEntity, model.Id);
+            if (result != IdentityResult.Success)
+            {
+                return null;
+            }
+
+            UserEntity newUser = await GetUserAsync(model.Email);
+            await AddUserToRoleAsync(newUser, userEntity.UserType.ToString());
+            return newUser;
+        }
+
     }
 
 }

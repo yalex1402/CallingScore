@@ -21,5 +21,7 @@ namespace CallingScore.Common.Services
 
         Task<Response> GetStatistics(string urlBase, string servicePrefix, string controller, string tokenType, string accessToken, StatisticsRequest request);
 
+        Task<Response> GetTokenAsync(string urlBase, string servicePrefix, string controller, FacebookProfile request);
+
     }
 }

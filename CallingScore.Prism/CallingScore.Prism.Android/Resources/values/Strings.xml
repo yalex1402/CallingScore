@@ -2,4 +2,7 @@
 <resources>
 	<string name="hello">Hello World, Click Me!</string>
 	<string name="app_name">CallingScore.Prism.Droid</string>
+  <string name="facebook_app_name">Soccer</string>
+  <string name="facebook_app_id">1482989221879409</string>
+  <string name="fb_login_protocol_scheme">fb1482989221879409</string>
 </resources>

@@ -36,6 +36,9 @@ namespace CallingScore.Web.Data.Entities
         [Display(Name = "User Type")]
         public UserType UserType { get; set; }
 
+        [Display(Name = "Login Type")]
+        public LoginType LoginType { get; set; }
+
         public string FullName => $"{FirstName} {LastName}";
 
         public string FullNameWithDocument => $"{FirstName} {LastName} - {Document}";

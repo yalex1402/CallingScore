@@ -23,11 +23,13 @@ namespace CallingScore.Common.Models
 
         public string PictureFullPath => string.IsNullOrEmpty(PicturePath)
                     ? "https://callingscoreweb.azurewebsites.net//images/noimage.png"
-                    : $"https://callingscoreweb.azurewebsites.net{PicturePath.Substring(1)}";
+                    : LoginType == LoginType.App ? $"https://callingscoreweb.azurewebsites.net{PicturePath.Substring(1)}" : PicturePath;
 
         public string PicturePath { get; set; }
 
         public UserType UserType { get; set; }
+
+        public LoginType LoginType { get; set; }
 
         public Campaign Campaign { get; set; }
 
