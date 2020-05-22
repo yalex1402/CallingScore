@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+             xmlns:i18n="clr-namespace:CallingScore.Prism.Helpers"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="CallingScore.Prism.Views.LoginPage"
              Title="{Binding Title}"
@@ -24,27 +25,27 @@
                     <Label Grid.Column="0" 
                            Grid.Row="0"
                            HorizontalTextAlignment="End"
-                           Text="Email"
+                           Text="{i18n:Translate Email}"
                            VerticalOptions="Center"/>
                     <Entry Grid.Column="1"
                            Grid.Row="0"
                            Keyboard="Email"
-                           Placeholder="Enter your email address"
+                           Placeholder="{i18n:Translate EmailPlaceHolder}"
                            Text="{Binding Email}"/>
                     <Label Grid.Column="0" 
                            Grid.Row="1"
                            HorizontalTextAlignment="End"
-                           Text="Password"
+                           Text="{i18n:Translate Password}"
                            VerticalOptions="Center"/>
                     <Entry Grid.Column="1"
                            Grid.Row="1"
                            IsPassword="True"
-                           Placeholder="Enter your password"
+                           Placeholder="{i18n:Translate PasswordPlaceHolder}"
                            Text="{Binding Password}"/>
                 </Grid>
                 <Label FontAttributes="Bold"
                         HorizontalOptions="Center" 
-                        Text="Forgot you password?"
+                        Text="{i18n:Translate ForgotPassword}"
                         TextColor="{StaticResource ColorFontInverse}">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}"/>
@@ -55,18 +56,18 @@
             <StackLayout>
                 <Button Command="{Binding LoginCommand}" 
                             IsEnabled="{Binding IsEnabled}"
-                            Text="Login"/>
+                            Text="{i18n:Translate Login}"/>
                 <Button BackgroundColor="#4768AD" 
                         Command="{Binding LoginFacebookCommand}"
                         HeightRequest="45"
                         IsEnabled="{Binding IsEnabled}"
                         Image="ic_fb"
-                        Text="Login with Facebook"
+                        Text="{i18n:Translate LoginFB}"
                         TextColor="#FFFFFF"/>
 
                 <Button Command="{Binding RegisterCommand}" 
                             IsEnabled="{Binding IsEnabled}"
-                            Text="Register"
+                            Text="{i18n:Translate Register}"
                             Style="{StaticResource DangerButton}"/>
             </StackLayout>
         </StackLayout>
@@ -77,7 +78,7 @@
                 	                   HorizontalOptions="Center"
                 	                   TextColor="{StaticResource ColorFontInverse}"
                 	                   IsVisible="{Binding IsRunning}"
-                	                   Title="Loading..."
+                	                   Title="{i18n:Translate Loading}"
                 	                   VerticalOptions="Center"
                 	                   ViewBoxWidth="80"
                 	                   ViewBoxHeight="80" />

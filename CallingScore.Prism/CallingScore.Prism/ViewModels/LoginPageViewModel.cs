@@ -1,6 +1,7 @@
 ﻿using CallingScore.Common.Helpers;
 using CallingScore.Common.Models;
 using CallingScore.Common.Services;
+using CallingScore.Prism.Helpers;
 using CallingScore.Prism.Views;
 using Newtonsoft.Json;
 using Plugin.FacebookClient;
@@ -33,7 +34,7 @@ namespace CallingScore.Prism.ViewModels
         {
             _navigationService = navigationService;
             _apiService = apiService;
-            Title = "Login";
+            Title = Languages.Login;
             IsEnabled = true;
         }
 
@@ -70,7 +71,7 @@ namespace CallingScore.Prism.ViewModels
             bool IsValid = ValidateData();
             if (!IsValid)
             {
-                await App.Current.MainPage.DisplayAlert("Error", "The field cannot be empty", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ErrorEmptyField, Languages.Accept);
                 return;
             }
 
@@ -83,7 +84,7 @@ namespace CallingScore.Prism.ViewModels
             {
                 IsRunning = false;
                 IsEnabled = true;
-                await App.Current.MainPage.DisplayAlert("Error", "Check the internet connection", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.InternetConnection, Languages.Accept);
                 return;
             }
 
@@ -99,7 +100,7 @@ namespace CallingScore.Prism.ViewModels
             {
                 IsRunning = false;
                 IsEnabled = true;
-                await App.Current.MainPage.DisplayAlert("Error", "There has ocurred an error when try to login", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ErrorLogin, Languages.Accept);
                 Password = string.Empty;
                 return;
             }
@@ -107,7 +108,7 @@ namespace CallingScore.Prism.ViewModels
             TokenResponse token = (TokenResponse)response.Result;
             EmailRequest emailRequest = new EmailRequest
             {
-                CultureInfo = "es",
+                CultureInfo = Languages.Culture,
                 Email = Email
             };
 
@@ -146,13 +147,13 @@ namespace CallingScore.Prism.ViewModels
                             await LoginFacebookAsync(facebookProfile);
                             break;
                         case FacebookActionStatus.Canceled:
-                            await App.Current.MainPage.DisplayAlert("Facebook Auth", "Canceled", "Ok");
+                            await App.Current.MainPage.DisplayAlert(Languages.FBAuthorization, Languages.Canceled, Languages.Ok);
                             break;
                         case FacebookActionStatus.Error:
-                            await App.Current.MainPage.DisplayAlert("Facebook Auth", "Error", "Ok");
+                            await App.Current.MainPage.DisplayAlert(Languages.FBAuthorization, Languages.Error, Languages.Ok);
                             break;
                         case FacebookActionStatus.Unauthorized:
-                            await App.Current.MainPage.DisplayAlert("Facebook Auth", "Unauthorized", "Ok");
+                            await App.Current.MainPage.DisplayAlert(Languages.FBAuthorization, Languages.Unauthorized, Languages.Ok);
                             break;
                     }
 
@@ -170,7 +171,6 @@ namespace CallingScore.Prism.ViewModels
                 Debug.WriteLine(ex.ToString());
             }
         }
-
 
         private async void RegisterAsync()
         {
@@ -204,7 +204,7 @@ namespace CallingScore.Prism.ViewModels
             {
                 IsRunning = false;
                 IsEnabled = true;
-                await App.Current.MainPage.DisplayAlert("Error", "User or Password aren't valid", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ErrorLogin, Languages.Accept);
                 Password = string.Empty;
                 return;
             }
@@ -212,7 +212,7 @@ namespace CallingScore.Prism.ViewModels
             TokenResponse token = (TokenResponse)response.Result;
             EmailRequest request2 = new EmailRequest
             {
-                CultureInfo = "es",
+                CultureInfo = Languages.Culture,
                 Email = facebookProfile.Email
             };
 
