@@ -1,9 +1,14 @@
 ﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using Android.Runtime;
+using Java.Security;
+using Plugin.CurrentActivity;
+using Plugin.Permissions;
 using Prism;
 using Prism.Ioc;
 using Syncfusion.SfBusyIndicator.XForms.Droid;
+using System;
 
 namespace CallingScore.Prism.Droid
 {
@@ -17,11 +22,19 @@ namespace CallingScore.Prism.Droid
 
             base.OnCreate(bundle);
 
+            CrossCurrentActivity.Current.Init(this, bundle);
             global::Xamarin.Forms.Forms.Init(this, bundle);
             new SfBusyIndicatorRenderer();
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(true);
             LoadApplication(new App(new AndroidInitializer()));
         }
+
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
+        {
+           PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+
     }
 
     public class AndroidInitializer : IPlatformInitializer
